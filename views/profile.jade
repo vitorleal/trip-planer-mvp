@@ -1,0 +1,46 @@
+extends layout-inside
+
+block banner
+    img.img-polaroid.img-profile(src="http://graph.facebook.com/#{username}/picture?type=large")
+    h2.name-profile= __('Welcome %s', name)
+
+block content
+    .row
+        dl.span9.offset1.dl-horizontal
+            dt
+                i.icon-envelope
+            dd= email
+
+            dt
+                i.icon-thumbs-up
+            dd= facebook_id
+
+            dt
+                i.icon-user
+            dd= gender
+
+            dt
+                i.icon-globe
+            dd= hometown
+
+            dt
+                i.icon-map-marker
+            dd= location
+
+            dt
+                i.icon-gift
+            dd= birthday
+
+            dt
+                i.icon-time
+            dd
+                strong Joined -
+
+                = fromNow(createdAt)
+
+            dt
+                i.icon-time
+            dd
+                strong Last visit -
+
+                = fromNow(latsUpdate)

@@ -1,0 +1,34 @@
+include includes/head
+
+    body
+        section
+            block header
+                header(class="navbar navbar-fixed-top")
+                    .navbar-inner
+                        .container
+                            a.brand(href="/")= title
+
+                .subhead
+                    .container
+                        h1.logo #{__("Plan it")}
+                        h2 #{__("The best way to plan your trip")}
+                        a.login-fb.pull-right(href="/auth/facebook") #{__("login with facebook")}
+
+            article.sub-content
+                .container
+                    block content
+
+                    block footer
+                        footer
+                            ul.unstyled
+                                li
+                                    a(href="/") #{__('home')}
+                                li
+                                    a(href="/about") #{__('about')}
+                                li
+                                    a(href="/terms") #{__('terms of service')}
+                                li
+                                    a(href="/auth/facebook") #{__("login with facebook")}
+
+                            small.muted= title + ' © 2012 - All rights reserved'
+

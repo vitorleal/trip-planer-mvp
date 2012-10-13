@@ -1,0 +1,100 @@
+//
+// Plnit
+// --------------------------------------------------
+body {
+  background: url(../images/bg.png) rgb(246, 246, 246);
+}
+
+footer {
+  border-top: dotted 1px lighten(@grayLight, 25%);
+  padding-top: 30px;
+  margin-top: 50px;
+  text-align: center;
+
+  li {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    margin: 0 12px;
+  }
+}
+
+// Big logo
+.logo {
+  background: url(../images/plnit.png);
+  width: 420px;
+  height: 165px;
+  overflow: hidden;
+  text-indent: -999px;
+}
+
+// Samll logo
+.brand {
+  background: url(../images/plnit-small.png) no-repeat left center;
+  height: 35px; width: 66px;
+  overflow: hidden;
+  text-indent: -999px;
+}
+
+// Facebook login
+.login-fb {
+  background: url(../images/login-fb.png) no-repeat left top;
+  display: block;
+  width: 287px; height: 53px;
+  overflow: hidden;
+  text-indent: -999px;
+  position: absolute;
+  right: 0;
+  bottom: 8px;
+
+  &:hover {
+    background-position: left bottom;
+  }
+}
+
+// Subhead
+.subhead {
+  height: 245px; width: 100%;
+  top: 50px; left: 0;
+  padding: 40px 0;
+  background: url(../images/map_bg.jpg) center center;
+  position: fixed;
+  z-index: 1;
+
+    // Subhead profile
+    &.inside {
+      height: 120px;
+      position: static;
+
+      .img-profile {
+        position: absolute;
+        top: 50%;
+        z-index: 3;
+      }
+
+      .name-profile {
+        position: absolute;
+        left: 220px;
+        top: 95px;
+        text-shadow: 1px 1px 0px rgb(255, 255, 255);
+      }
+    }
+
+    .container {
+      height: 100%;
+      position: relative;
+    }
+}
+
+// Subcontent
+.sub-content {
+  background: url(../images/bg.png) rgb(246, 246, 246);
+  position: relative;
+  margin-top: 370px;
+  z-index: 2;
+  box-shadow: 0 -10px 12px rgba(102, 102, 102, .3);
+
+  &.inside {
+    margin-top: 0;
+  }
+}
