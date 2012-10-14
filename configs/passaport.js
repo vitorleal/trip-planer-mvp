@@ -14,11 +14,6 @@ module.exports = function(passport, User) {
 
             query.exec(function (err, oldUser) {
                 if(oldUser) {
-                    oldUser.last_update = new Date();
-                    oldUser.save(function (err) {
-                        if (err) { throw err; }
-                        console.log('User: ' + oldUser.name + ' updated!');
-                    });
                     console.log('User: ' + oldUser.name + ' found and logged in!');
                     done(null, oldUser);
                 } else {

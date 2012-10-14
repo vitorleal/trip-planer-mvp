@@ -8,6 +8,9 @@ include includes/head
                         .container
                             a.brand(href="/")= title
 
+                            block menuHeader
+                                include includes/menu-header
+
                 .subhead
                     .container
                         h1.logo #{__("Plan it")}
@@ -28,7 +31,7 @@ include includes/head
                                 li
                                     a(href="/terms-of-use") #{__('terms of use')}
                                 li
-                                    a(href="/auth/facebook") #{__("login with facebook")}
+                                    a(href="/auth/facebook") #{__('login with facebook')}
 
-                            small.muted= title + ' © 2012 - All rights reserved'
+                            small.muted Plan it © #{new Date().getFullYear()} - All rights reserved
 

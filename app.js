@@ -48,12 +48,24 @@ app.configure(function () {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(i18n.init);
 
+
+    app.use(function(req, res, next){
+
+      next();
+    });
     app.locals({
         date: function(date) {
             return moment(date).format('MM/DD/YYYY');
         },
         fromNow: function(date) {
             return moment(date).fromNow()
+        },
+        yearsOld: function(birthday) {
+            var today     = new Date(),
+                year      = today.getFullYear(),
+                birthyear = new Date(birthday).getFullYear();
+
+            return year - birthyear;
         }
     });
 });
@@ -94,13 +106,33 @@ var userSchema = new schema({
         default: Date.now
     }
 }),
-User = db.model('User', userSchema);
+User = db.model('User', userSchema),
+
+// Destination schema
+destinationSchema = new schema({
+    country: {
+        name: String,
+        geoLocation: {
+            lat: String,
+            lang: String
+        }
+    },
+    city: {
+        name: String,
+        geoLocation: {
+            lat: String,
+            lang: String
+        }
+    }
+}),
+Destination = db.model('Destination', destinationSchema);
+
 
 //Passaport config
 passaportConifg = require('./configs/passaport.js')(passport, User);
 
 //Routes
-routes = require("./routes/routes.js")(app, ensureAuthenticated, passport);
+routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination);
 
 
 // Create the server

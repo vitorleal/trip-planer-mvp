@@ -15,6 +15,9 @@ include includes/head
                                 ul.dropdown-menu
                                     li
                                         a(href="/profile"): <i class="icon-user icon-blue i-mr"></i> #{__('profile')}
+                                    li
+                                        a(href="/start-planit"): <i class="icon-plane icon-blue i-mr"></i> #{__('start plan it')}
+
                                     li.divider
                                     li
                                         a(href="/logout"): <i class="icon-off icon-blue i-mr"></i> #{__('logout')}
@@ -34,9 +37,11 @@ include includes/head
                                 li
                                     a(href="/profile") #{__('profile')}
                                 li
+                                    a(href="/start-planit") #{__('start plan it')}
+                                li
                                     a(href="/about") #{__('about')}
                                 li
                                     a(href="/terms-of-use") #{__('terms of use')}
 
-                            small.muted= title + ' © 2012 - All rights reserved'
+                            small.muted Plan it © #{new Date().getFullYear()} - All rights reserved
 

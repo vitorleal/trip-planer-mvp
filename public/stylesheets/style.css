@@ -44,6 +44,10 @@ footer li {
 .login-fb:hover {
   background-position: left bottom;
 }
+header .container .nav {
+  margin-top: 7px;
+  margin-left: 20px;
+}
 .subhead {
   height: 245px;
   width: 100%;
@@ -82,6 +86,14 @@ footer li {
 }
 .sub-content.inside {
   margin-top: 0;
+}
+.img-map {
+  position: relative;
+}
+.img-map button {
+  position: absolute;
+  left: 295px;
+  top: -6px;
 }
 article,
 aside,
@@ -4967,4 +4979,16 @@ a.badge:hover {
 }
 .affix {
   position: fixed;
+}
+.mb {
+  margin-bottom: 15px;
+}
+.mb.mb-big {
+  margin-bottom: 30px;
+}
+.mt {
+  margin-top: 15px;
+}
+.mt.mt-big {
+  margin-top: 30px;
 }

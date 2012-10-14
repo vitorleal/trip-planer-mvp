@@ -6,7 +6,7 @@ block banner
 
 block content
     .row
-        dl.span9.offset1.dl-horizontal
+        dl.span7.offset1.dl-horizontal
             dt
                 i.icon-envelope
             dd= email
@@ -30,17 +30,24 @@ block content
             dt
                 i.icon-gift
             dd= birthday
+            dt
+                i.icon-gift
+            dd
+                = yearsOld(birthday)
+                | #{__(' years old')}
 
             dt
                 i.icon-time
             dd
                 strong Joined -
-
                 = fromNow(createdAt)
 
             dt
                 i.icon-time
             dd
                 strong Last visit -
-
                 = fromNow(latsUpdate)
+
+        .span3.offset1
+            h4 Start planning your trip
+            a.btn.btn-primary.btn-large.btn-success(href="/start-panit"): <i class="icon-plane icon-white"></i> #{__('Start plan it')}
