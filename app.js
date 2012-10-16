@@ -48,7 +48,6 @@ app.configure(function () {
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(i18n.init);
 
-
     app.use(function(req, res, next){
 
       next();
@@ -61,11 +60,10 @@ app.configure(function () {
             return moment(date).fromNow()
         },
         yearsOld: function(birthday) {
-            var today     = new Date(),
-                year      = today.getFullYear(),
+            var year      = new Date().getFullYear(),
                 birthyear = new Date(birthday).getFullYear();
 
-            return year - birthyear;
+            return (year - birthyear);
         }
     });
 });
@@ -88,21 +86,21 @@ i18n.configure({
 
 // User model
 var userSchema = new schema({
-    name: String,
-    email: String,
-    username: String,
-    gender: String,
+    name:        String,
+    email:       String,
+    username:    String,
+    gender:      String,
     facebook_id: String,
-    hometown: String,
-    location: String,
-    locale: String,
-    birthday: String,
+    hometown:    String,
+    location:    String,
+    locale:      String,
+    birthday:    String,
     created_at: {
-        type: Date,
+        type:    Date,
         default: Date.now
     },
     last_update: {
-        type: Date,
+        type:    Date,
         default: Date.now
     }
 }),
@@ -111,16 +109,16 @@ User = db.model('User', userSchema),
 // Destination schema
 destinationSchema = new schema({
     country: {
-        name: String,
+        name:     String,
         geoLocation: {
-            lat: String,
+            lat:  String,
             lang: String
         }
     },
     city: {
-        name: String,
+        name:     String,
         geoLocation: {
-            lat: String,
+            lat:  String,
             lang: String
         }
     }

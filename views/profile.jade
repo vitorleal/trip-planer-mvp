@@ -1,5 +1,8 @@
 extends layout-inside
 
+block modal
+    include includes/utils/modals/modal-start.jade
+
 block banner
     img.img-polaroid.img-profile(src="http://graph.facebook.com/#{username}/picture?type=large")
     h2.name-profile= __('Welcome %s', name)
@@ -50,4 +53,4 @@ block content
 
         .span3.offset1
             h4 Start planning your trip
-            a.btn.btn-primary.btn-large.btn-success(href="/start-panit"): <i class="icon-plane icon-white"></i> #{__('Start plan it')}
+            a.btn.btn-primary.btn-large.btn-success(href="#", data-toggle="modal", data-target="#startModal"): <i class="icon-plane icon-white"></i> #{__('Start plan it')}
