@@ -1,0 +1,14 @@
+extends ../layout-map
+
+block append head
+    script(src='https://maps.google.com/maps/api/js?sensor=false')
+    script(src='/javascripts/map.js')
+
+block modal
+
+block banner
+
+block content
+    #map= user.name
+
+block footer

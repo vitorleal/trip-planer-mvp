@@ -1,0 +1,32 @@
+include includes/head
+    body
+        block notifications
+
+        block modal
+
+        section
+            block header
+                header(class="navbar navbar-fixed-top")
+                    .navbar-inner
+                        .container
+                            a.brand(href="/profile")= title
+
+
+                            .btn-group.pull-right.btn-options
+                                a.btn.dropdown-toggle.btn-primary(data-toogle="dropdown", href="#"): <i class="icon-cog icon-white"></i> #{__('options')}
+                                    span.caret
+                                ul.dropdown-menu
+                                    li
+                                        a(href="/profile"): <i class="icon-user icon-blue i-mr"></i> #{__('profile')}
+                                    li
+                                        a(href="/start-planit"): <i class="icon-plane icon-blue i-mr"></i> #{__('start plan it')}
+
+                                    li.divider
+                                    li
+                                        a(href="/logout"): <i class="icon-off icon-blue i-mr"></i> #{__('logout')}
+
+            article.sub-content.inside
+                    block content
+
+                    block footer
+

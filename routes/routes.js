@@ -2,7 +2,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
 
     // Index
     app.get('/', function (req, res) {
-        res.render('index', {
+        res.render('pages/index', {
             title: 'Plan it',
             description: 'Description of the first page'
         });
@@ -16,7 +16,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
 
     //About
     app.get('/about', function (req, res) {
-        res.render('about', {
+        res.render('pages/about', {
             title: 'About us',
             description: 'Description of the about page'
         });
@@ -24,7 +24,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
 
     //Terms of use
     app.get('/terms-of-use', function (req, res) {
-        res.render('terms', {
+        res.render('pages/terms', {
             title: 'Terms of use',
             description: 'Description of the terms of use page'
         });
@@ -34,7 +34,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
     //Add city
     app.get('/cityes', function (req, res) {
         Destination.find({}, function (err, city) {
-            res.render('./admin/cityes', {
+            res.render('admin/cityes', {
                 title: 'Cityes',
                 description: 'Description of cityes',
                 citys: city
@@ -83,7 +83,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
             }
         });
 
-        res.render('profile', {
+        res.render('logged/profile', {
             title: req.user.name + ' profile - Plan it',
             description: 'Description of the profile page',
             name: req.user.name,
@@ -96,6 +96,25 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
             birthday: req.user.birthday,
             createdAt: req.user.created_at,
             latsUpdate: req.user.last_update
+        });
+    });
+
+    app.get('/map', ensureAuthenticated, function (req, res) {
+        res.render('logged/map', {
+            title: "Planit Map",
+            description: 'Description of the map page',
+            user: {
+                name: req.user.name,
+                email: req.user.email,
+                username: req.user.username,
+                facebook_id: req.user.facebook_id,
+                gender: req.user.gender,
+                hometown: req.user.hometown,
+                location: req.user.location,
+                birthday: req.user.birthday,
+                createdAt: req.user.created_at,
+                latsUpdate: req.user.last_update
+            }
         });
     });
 

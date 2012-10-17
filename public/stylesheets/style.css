@@ -95,6 +95,11 @@ header .container .nav {
   left: 295px;
   top: -6px;
 }
+#map {
+  margin-top: 55px;
+  height: 100%;
+  width: 100%;
+}
 article,
 aside,
 details,
