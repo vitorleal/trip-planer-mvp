@@ -1,4 +1,4 @@
-module.exports = function(app, ensureAuthenticated, passport, User, Destination) {
+module.exports = function(app, ensureAuthenticated, passport, User, Destination, Trip) {
 
     // Index
     app.get('/', function (req, res) {
@@ -47,10 +47,10 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
 
             destination.country.name = req.body.country;
             destination.country.geoLocation.lat = req.body.countryGeolocation.split(',')[0];
-            destination.country.geoLocation.lang = req.body.countryGeolocation.split(',')[1];
+            destination.country.geoLocation.lng = req.body.countryGeolocation.split(',')[1];
             destination.city.name = req.body.city;
             destination.city.geoLocation.lat = req.body.cityGeolocation.split(',')[0];
-            destination.city.geoLocation.lang = req.body.cityGeolocation.split(',')[1];
+            destination.city.geoLocation.lng = req.body.cityGeolocation.split(',')[1];
 
             destination.save(function (err) {
                 if (err) { throw err; }
@@ -83,27 +83,10 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
             }
         });
 
-        res.render('logged/profile', {
-            title: req.user.name + ' profile - Plan it',
-            description: 'Description of the profile page',
-            name: req.user.name,
-            email: req.user.email,
-            username: req.user.username,
-            facebook_id: req.user.facebook_id,
-            gender: req.user.gender,
-            hometown: req.user.hometown,
-            location: req.user.location,
-            birthday: req.user.birthday,
-            createdAt: req.user.created_at,
-            latsUpdate: req.user.last_update
-        });
-    });
-
-    app.get('/map', ensureAuthenticated, function (req, res) {
-        res.render('logged/map', {
-            title: "Planit Map",
-            description: 'Description of the map page',
-            user: {
+        Destination.find({}, function (err, citys) {
+            res.render('logged/profile', {
+                title: req.user.name + ' profile - Plan it',
+                description: 'Description of the profile page',
                 name: req.user.name,
                 email: req.user.email,
                 username: req.user.username,
@@ -113,16 +96,41 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination)
                 location: req.user.location,
                 birthday: req.user.birthday,
                 createdAt: req.user.created_at,
-                latsUpdate: req.user.last_update
-            }
+                latsUpdate: req.user.last_update,
+                destinations: citys
+            });
+        });
+    });
+
+    // Maps
+    app.get('/map', ensureAuthenticated, function (req, res) {
+        res.redirect('/profile#start');
+    });
+    app.post('/map', ensureAuthenticated, function (req, res) {
+        Destination.findById(req.body.destination, function (err, destination) {
+            res.render('logged/map', {
+                title: "Planit Map",
+                description: 'Description of the map page',
+                user: {
+                    name: req.user.name,
+                    email: req.user.email,
+                    username: req.user.username,
+                    facebook_id: req.user.facebook_id,
+                    gender: req.user.gender,
+                    hometown: req.user.hometown,
+                    location: req.user.location,
+                    birthday: req.user.birthday,
+                    createdAt: req.user.created_at,
+                    latsUpdate: req.user.last_update
+                },
+                destination: destination
+            });
         });
     });
 
     // Facebook auth routes
     app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_birthday', 'user_hometown', 'user_checkins' ] }),
-        function (req, res) {
-
-        }
+        function (req, res) {}
     );
     app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
         function (req, res) {

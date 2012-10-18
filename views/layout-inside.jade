@@ -19,7 +19,7 @@ include includes/head
                                     li
                                         a(href="/profile"): <i class="icon-user icon-blue i-mr"></i> #{__('profile')}
                                     li
-                                        a(href="/start-planit"): <i class="icon-plane icon-blue i-mr"></i> #{__('start plan it')}
+                                        a(href="#", data-toggle="modal", data-target="#startModal"): <i class="icon-plane icon-blue i-mr"></i> #{__('start plan it')}
 
                                     li.divider
                                     li
@@ -40,9 +40,7 @@ include includes/head
                                 li
                                     a(href="/profile") #{__('profile')}
                                 li
-                                    a(href="/start-planit") #{__('start plan it')}
-                                li
-                                    a(href="/about") #{__('about')}
+                                    a(href="#", data-toggle="modal", data-target="#startModal") #{__('start plan it')}
                                 li
                                     a(href="/terms-of-use") #{__('terms of use')}
 

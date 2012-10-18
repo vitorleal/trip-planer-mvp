@@ -109,28 +109,48 @@ User = db.model('User', userSchema),
 // Destination schema
 destinationSchema = new schema({
     country: {
-        name:     String,
+        name:    String,
         geoLocation: {
-            lat:  String,
-            lang: String
+            lat: String,
+            lng: String
         }
     },
     city: {
-        name:     String,
+        name:    String,
         geoLocation: {
-            lat:  String,
-            lang: String
+            lat: String,
+            lng: String
         }
     }
 }),
-Destination = db.model('Destination', destinationSchema);
+Destination = db.model('Destination', destinationSchema),
+
+tripSchema = new schema({
+    user_id: String,
+    title: {
+        type: String,
+        default: "Untitled"
+    },
+    date_start: Date,
+    total_days: String,
+    destination: {
+        id: String,
+        name: String,
+        lat: String,
+        lng: String
+    },
+    poi: Array,
+    hotel_id: String,
+    intensity: String
+}),
+Trip = db.model('Trip', tripSchema);
 
 
 //Passaport config
 passaportConifg = require('./configs/passaport.js')(passport, User);
 
 //Routes
-routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination);
+routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination, Trip);
 
 
 // Create the server

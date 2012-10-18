@@ -3,6 +3,9 @@ extends ../layout-inside
 block modal
     include ../includes/utils/modals/modal-start.jade
 
+block append head
+    script(src='/javascripts/profile.js')
+
 block banner
     img.img-polaroid.img-profile(src="http://graph.facebook.com/#{username}/picture?type=large")
     h2.name-profile= __('Welcome %s', name)
@@ -51,6 +54,6 @@ block content
                 strong Last visit -
                 = fromNow(latsUpdate)
 
-        .span3.offset1
+        .span3.offset1.t-center
             h4 Start planning your trip
             a.btn.btn-primary.btn-large.btn-success(href="#", data-toggle="modal", data-target="#startModal"): <i class="icon-plane icon-white"></i> #{__('Start plan it')}

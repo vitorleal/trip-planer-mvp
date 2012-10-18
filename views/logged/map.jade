@@ -6,9 +6,7 @@ block append head
 
 block modal
 
-block banner
-
 block content
-    #map= user.name
+    #map(data-lat=destination.city.geoLocation.lat, data-lng=destination.city.geoLocation.lng)= user.name
 
 block footer

@@ -5,7 +5,12 @@ var maps = {
     lat: 40.416691,
     lng: -3.700345
   },
-  zoom: 13,
+  markers: {
+    blue: "images/pointer-blue.png",
+    red: "images/pointer-red.png",
+    green: "images/pointer-green.png"
+  },
+  zoom: 14,
 
   init: function(lat, lng) {
     var latlng = new google.maps.LatLng(lat, lng),
@@ -30,7 +35,9 @@ var maps = {
         position: latlng,
         map: map,
         title: 'Hello World!',
-        animation: google.maps.Animation.DROP
+        animation: google.maps.Animation.DROP,
+        icon: this.markers.blue,
+        shadow: "images/pointer-shadow.png"
     });
   },
 
@@ -48,8 +55,11 @@ var maps = {
 
 //init map
 $(function () {
+  var lat = $('#map').data('lat'),
+      lng = $('#map').data('lng');
+
   maps.resize();
-	maps.init(maps.center.lat, maps.center.lng);
+	maps.init(lat, lng);
 });
 
 //resize map

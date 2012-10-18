@@ -17,7 +17,7 @@ block content
                                     input(type="hidden", name="_method", value="delete")
                                     input(type="hidden", value=city._id, name="id")
                                     button.btn.btn-mini.btn-danger(title="remove this city", type="submit") X
-                                    img.img-polaroid(src="http://maps.googleapis.com/maps/api/staticmap?center="+ city.city.geoLocation.lat +","+ city.city.geoLocation.lang +"&zoom=12&size=300x120&sensor=false")
+                                    img.img-polaroid(src="http://maps.googleapis.com/maps/api/staticmap?center="+ city.city.geoLocation.lat +","+ city.city.geoLocation.lng +"&zoom=12&size=300x120&sensor=false")
                     - })
 
         .span3

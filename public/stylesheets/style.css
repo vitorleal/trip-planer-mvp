@@ -4985,6 +4985,15 @@ a.badge:hover {
 .affix {
   position: fixed;
 }
+.t-center {
+  text-align: center;
+}
+.t-left {
+  text-align: left;
+}
+.t-right {
+  text-align: right;
+}
 .mb {
   margin-bottom: 15px;
 }
