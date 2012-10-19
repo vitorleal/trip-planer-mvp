@@ -96,9 +96,17 @@ header .container .nav {
   top: -6px;
 }
 #map {
+  float: left;
   margin-top: 55px;
   height: 100%;
-  width: 100%;
+  width: 75%;
+}
+.side-map {
+  background: url(../images/bg.png) #f6f6f6;
+  float: left;
+  margin: 55px 0 0 0;
+  min-height: 100%;
+  width: 25%;
 }
 article,
 aside,

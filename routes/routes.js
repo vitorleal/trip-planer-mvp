@@ -123,7 +123,12 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
                     createdAt: req.user.created_at,
                     latsUpdate: req.user.last_update
                 },
-                destination: destination
+                destination: destination,
+                trip: {
+                    date: req.body.date,
+                    days: req.body.days,
+                    intensity: req.body.intensity
+                }
             });
         });
     });

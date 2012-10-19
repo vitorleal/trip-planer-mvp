@@ -46,10 +46,17 @@ var maps = {
   },
 
   resize: function() {
-    var w = $(window).width(),
-        h = $(window).height();
+    var w = $(window).width() - $('.side-map').width(),
+        h = $(window).height() - $('.navbar-fixed-top').height();
 
-    $('#map').width(w).height(h);
+    $('#map').height(h);
+
+    if (this.map) {
+      var lat = $('#map').data('lat'),
+          lng = $('#map').data('lng');
+
+      this.map.panTo(new google.maps.LatLng(lat, lng));
+    }
   }
 }
 
