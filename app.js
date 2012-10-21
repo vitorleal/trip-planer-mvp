@@ -16,6 +16,7 @@ var express = require("express"),
 
     app              = express();
 
+
 // Config express
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
@@ -46,18 +47,15 @@ app.configure(function () {
     }));
 
     app.use(express.static(path.join(__dirname, 'public')));
+
     app.use(i18n.init);
 
-    app.use(function(req, res, next){
-
-      next();
-    });
     app.locals({
         date: function(date) {
             return moment(date).format('MM/DD/YYYY');
         },
         fromNow: function(date) {
-            return moment(date).fromNow()
+            return moment(date).fromNow();
         },
         yearsOld: function(birthday) {
             var year      = new Date().getFullYear(),
@@ -73,15 +71,16 @@ app.configure('development', function () {
     app.use(express.errorHandler());
 });
 
+app.configure('production', function () {
+    app.use(express.errorHandler());
+});
+
 
 // i18n Config
 i18n.configure({
     locales:['en', 'pt-br', 'es'],
     register: global
 });
-
-// Moment date config
-//moment.lang('pt-br');
 
 
 // User model
@@ -109,14 +108,14 @@ User = db.model('User', userSchema),
 // Destination schema
 destinationSchema = new schema({
     country: {
-        name:    String,
+        name: String,
         geoLocation: {
             lat: String,
             lng: String
         }
     },
     city: {
-        name:    String,
+        name: String,
         geoLocation: {
             lat: String,
             lng: String

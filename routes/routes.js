@@ -39,7 +39,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
                 description: 'Description of cityes',
                 citys: city
             });
-        })
+        });
     });
         //Add city post
         app.post('/cityes', function (req, res) {
@@ -143,4 +143,4 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
         }
     );
 
-}
+};
