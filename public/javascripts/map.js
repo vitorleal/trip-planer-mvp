@@ -28,6 +28,23 @@ var maps = {
 
     this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
     this.setMarker(latlng, this.map);
+
+    var request = {
+      location: latlng,
+      radius: ' 1000',
+      types: ['store']
+    },
+    service = new google.maps.places.PlacesService(this.map),
+    self = this;
+
+    service.search(request, function (results, status) {
+      if (status == google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+          var place = results[i];
+          self.setMarkerRed(new google.maps.LatLng(results[i].geometry.location.Xa, results[i].geometry.location.Ya), self.map);
+        }
+      }
+    })
   },
 
   setMarker: function(latlng, map) {
@@ -37,6 +54,17 @@ var maps = {
         title: 'Hello World!',
         animation: google.maps.Animation.DROP,
         icon: this.markers.blue,
+        shadow: "images/pointer-shadow.png"
+    });
+  },
+
+  setMarkerRed: function(latlng, map) {
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title: 'Hello World!',
+        animation: google.maps.Animation.DROP,
+        icon: this.markers.red,
         shadow: "images/pointer-shadow.png"
     });
   },

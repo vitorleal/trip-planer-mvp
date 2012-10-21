@@ -100,6 +100,7 @@ header .container .nav {
   margin-top: 55px;
   height: 100%;
   width: 75%;
+  box-shadow: -1px 0 20px rgba(0, 0, 0, 0.2);
 }
 .side-map {
   background: url(../images/bg.png) #f6f6f6;
@@ -107,6 +108,9 @@ header .container .nav {
   margin: 55px 0 0 0;
   min-height: 100%;
   width: 25%;
+}
+.side-map .side-map-content {
+  padding: 15px 30px;
 }
 article,
 aside,
@@ -845,7 +849,7 @@ pre code {
   overflow-y: scroll;
 }
 form {
-  margin: 0 0 20px;
+  margin: 0;
 }
 fieldset {
   padding: 0;
@@ -5013,4 +5017,10 @@ a.badge:hover {
 }
 .mt.mt-big {
   margin-top: 30px;
+}
+.ml {
+  margin-left: 15px;
+}
+.mr {
+  margin-right: 15px;
 }
