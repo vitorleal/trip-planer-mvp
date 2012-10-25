@@ -6,7 +6,7 @@ module.exports = function(passport, User) {
     passport.use(new facebookStrategy({
             clientID    : '112711522214518',
             clientSecret: 'f6a03086d3530372c5715458b7ef9563',
-            callbackURL : "http://localhost:3000/auth/facebook/callback"
+            callbackURL : "/auth/facebook/callback"
         },
         function (accessToken, refreshToken, profile, done) {
 
