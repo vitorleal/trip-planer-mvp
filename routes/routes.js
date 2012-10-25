@@ -32,17 +32,17 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
 
 
     //Add city
-    app.get('/cityes', function (req, res) {
+    app.get('/cities', function (req, res) {
         Destination.find({}, function (err, city) {
-            res.render('admin/cityes', {
-                title: 'Cityes',
-                description: 'Description of cityes',
-                citys: city
+            res.render('admin/cities', {
+                title: 'Cities',
+                description: 'Description of cities',
+                cities: city
             });
         });
     });
         //Add city post
-        app.post('/cityes', function (req, res) {
+        app.post('/cities', function (req, res) {
             var destination = new Destination();
 
             destination.country.name = req.body.country;
@@ -55,15 +55,15 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
             destination.save(function (err) {
                 if (err) { throw err; }
                 console.log('New city saved');
-                res.redirect('/cityes');
+                res.redirect('/cities');
             });
         });
 
-        app.delete('/cityes', function (req, res) {
+        app.delete('/cities', function (req, res) {
             Destination.findById(req.body.id, function (err, destination) {
                 destination.remove(function (err, destination) {
                     console.log('City '+ destination +' deleted');
-                    res.redirect('/cityes');
+                    res.redirect('/cities');
                 });
             });
         });

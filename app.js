@@ -30,12 +30,6 @@ app.configure(function () {
     app.use(express.methodOverride());
 
     app.use(express.cookieParser());
-    app.use(express.session({
-        secret: "plnit2012",
-        store: new mongoSession({
-            db: 'test'
-        })
-    }));
     app.use(passport.initialize());
     app.use(passport.session());
 
@@ -69,10 +63,22 @@ app.configure(function () {
 // Dev Config
 app.configure('development', function () {
     app.use(express.errorHandler());
+    app.use(express.session({
+        secret: "plnit2012",
+        store: new mongoSession({
+            db: 'test'
+        })
+    }));
 });
 
 app.configure('production', function () {
     app.use(express.errorHandler());
+    app.use(express.session({
+        secret: "plnit2012",
+        store: new mongoSession({
+            db: 'plnit'
+        })
+    }));
 });
 
 

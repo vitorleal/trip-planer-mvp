@@ -5,12 +5,12 @@ block content
 
     .row
         .span9
-            h3 List of cityes
-                span.muted  (#{citys.length})
+            h3 List of cities
+                span.muted  (#{cities.length})
 
-            - if (citys)
+            - if (cities)
                 ol
-                    - citys.forEach(function (city) {
+                    - cities.forEach(function (city) {
                         li.mb.mb-big= city.city.name + ' - ' + city.country.name
                             .img-map
                                 form(action="/cityes", method="post")
@@ -22,7 +22,7 @@ block content
 
         .span3
             h3 Add new city
-            form(action="/cityes", method="post")
+            form(action="/cities", method="post")
                 ul.unstyled
                     li
                         input(type="text", placeholder="Country", name="country")
