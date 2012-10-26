@@ -24,6 +24,7 @@ var maps = {
   placesArray: [],
   markersArray: [],
   daysArray: [],
+  resultsArray: [],
 
 
 
@@ -101,6 +102,9 @@ var maps = {
 
 
   setMarkers: function(results) {
+    if (!this.resultsArray.length) {
+      this.resultsArray = results;
+    }
     var self = this;
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
@@ -116,16 +120,24 @@ var maps = {
     for (var i = 0; i < this.markersArray.length; i++ ) {
       this.markersArray[i].setMap(null);
     }
-    this.markersArray.length = 0;
+    this.markersArray = [];
+    this.placesArray  = [];
   },
 
 
 
   showDay: function (totalDays, day) {
-    var pointsDays = maps.placesArray.chunk(Math.ceil(maps.placesArray.length/totalDays));
+    var pointsDays = maps.resultsArray.chunk(Math.ceil(maps.resultsArray.length/totalDays));
 
+    this.daysArray = this.placesArray;
     this.clearMap();
     this.setMarkers(pointsDays[day]);
+
+    $('#days-plan').html('');
+
+    $.each(pointsDays[day], function (key, val) {
+      $('#days-plan').append('<li><h5>'+ val.name +'</h5></li>');
+    });
   },
 
 
@@ -165,6 +177,21 @@ $(function () {
       maps.showDay(totalDays, day);
       $(this).siblings().removeClass('disabled').end().addClass('disabled');
     }
+  });
+
+
+  $.getJSON('users/Madrid', function(users) {
+     if (users.length) {
+       $.each(users, function (key, val) {
+          $('#users').append('<div class="user">\
+            <a href="#" rel="popover" data-original-title="'+ val.name +'" data-content="'+ val.name.split(' ')[0] +' lives here, contact him! '+ val.email +'" data-trigger="hover">\
+              <img class="img-polaroid" src="http://graph.facebook.com/'+ val.facebook_id +'/picture?type=small"/>\
+            </a>\
+          </div>');
+        });
+        $('.user a').popover();
+        $('#users').delay(1500).fadeIn();
+     }
   });
 });
 

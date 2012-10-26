@@ -22,13 +22,18 @@ block content
 
         .days
             - for (var i = 0, len = trip.days; i < len; i++) {
-                a.btn.btn-info(href="#", data-day=i): <i class="icon-calendar icon-white"></i> Day #{i+1}
+                a.btn.btn-info.btn-small(href="#", data-day=i): <i class="icon-calendar icon-white"></i> Day #{i+1}
             - }
+
+        ol#days-plan
 
         #showInfo
             h2.title
             p.address
             p.rate
+
+        #users
+            h4 Contact your friends in #{destination.city.name}
 
     #map(data-lat=destination.city.geoLocation.lat, data-lng=destination.city.geoLocation.lng)
 
