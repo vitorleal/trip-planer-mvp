@@ -88,9 +88,11 @@ var maps = {
 
       marker.setIcon(self.markers.red);
       marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
-      $('#showInfo h2').text(marker.title);
-      $('#showInfo .address').text(marker.address);
-      $('#showInfo .rate').text(marker.rate);
+      // $('#showInfo h2').text(marker.title);
+      // $('#showInfo .address').text(marker.address);
+      // $('#showInfo .rate').text(marker.rate);
+
+      $('.id-'+ marker.id).siblings().removeClass('text-error').end().addClass('text-error');
     });
 
     // dbclick on marker
@@ -136,7 +138,8 @@ var maps = {
     $('#days-plan').html('');
 
     $.each(pointsDays[day], function (key, val) {
-      $('#days-plan').append('<li><h5>'+ val.name +'</h5></li>');
+      console.log(val);
+      $('#days-plan').append('<li class="id-'+ val.id +'"><h5>'+ val.name +'</h5><small class="muted">'+ val.vicinity +'</small></li>');
     });
   },
 

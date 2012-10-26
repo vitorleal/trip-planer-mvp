@@ -133,7 +133,7 @@ header .container .nav { margin-top: 7px; margin-left: 20px; }
   position: relative;
 
   .side-map-content {
-    padding: 15px;
+    padding: 15px 15px 0 15px;
 
     .trip-infos {
       strong { margin-right: 5px; }
@@ -145,7 +145,7 @@ header .container .nav { margin-top: 7px; margin-left: 20px; }
     margin: 0 15px 15px;
 
     a {
-      margin-left: 8px;
+      margin: 8px 8px 0 0;
 
       &:first-child {
         margin-left: 0;
@@ -164,10 +164,26 @@ header .container .nav { margin-top: 7px; margin-left: 20px; }
   }
 
   #days-plan {
-    border-top: dashed 1px rgb(225, 225, 225);
-    border-bottom: dashed 1px rgb(229, 229, 229);
-    margin: 15px;
-    padding-left: 20px;
+    border-bottom: dashed 1px rgb(194, 194, 194);
+    margin: 25px 15px;
+    padding: 0 0 15px 20px;
+
+    li {
+
+      h5 {
+        margin-bottom: 0;
+      }
+
+      .muted {
+        display: none;
+      }
+
+      &.text-error {
+
+        .muted { display: block; }
+      }
+    }
+
   }
 }
 
