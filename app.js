@@ -187,5 +187,9 @@ routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User,
 
 // Create the server
 http.createServer(app).listen(app.get('port'), function() {
-    console.log("Express server listening on port " + app.get('port'));
+    console.log("Express server listening on port %s in %s environment", app.get('port'), process.env.NODE_ENV);
 });
+
+
+//To start the enviroments
+//NODE_ENV=production forever app.js
