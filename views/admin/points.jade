@@ -1,0 +1,73 @@
+extends ../layout-inside
+
+block content
+    h2= title
+
+    .row
+        .span9
+            h3 List of points
+                span.muted  (#{points.length})
+
+            - if (points)
+                ol
+                    - points.forEach(function (point) {
+                        li.mb.mb-big
+                            h3= point.title
+                            form(action="/points", method="post")
+                                input(type="hidden", name="_method", value="delete")
+                                input(type="hidden", value=point._id, name="id")
+                                button.btn.btn-mini.btn-danger(title="remove " + point.title , type="submit") X
+                    - })
+
+        .span3
+            h3 Add new point
+            form(action="/points", method="post")
+                ul.unstyled
+                    li
+                        label Title
+                            input(type="text", name="title")
+                    li
+                        label Description
+                            textarea(name="description")
+                    li
+                        label Category
+                            select(name="category")
+                                option(value="no category") ---
+                                option(value="airport") airport
+                                option(value="amusement_park") amusement park
+                                option(value="art_gallery") art gallery
+                                option(value="bank") bank
+                                option(value="bar") bar
+                                option(value="bicycle_store") bicycle store
+                                option(value="book_store") book store
+                                option(value="cafe") cafe
+                                option(value="car_rental") car rental
+                                option(value="casino") casino
+                                option(value="food") food
+                                option(value="museum") museum
+                                option(value="night_club") night club
+                                option(value="park") park
+                                option(value="restaurant") restaurant
+                                option(value="stadium") stadium
+                                option(value="subway_station") subway station
+                                option(value="store") store
+                                option(value="zoo") zoo
+                    li
+                        label City
+                            select(name="city")
+                                option(value="Madrid") Madrid
+                    li
+                        label Geolocation
+                            input(type="text", name="latlng")
+                    li
+                        label Address
+                            input(type="text", name="address")
+                    li
+                        label Have Promotion?
+                            .check
+                                input(type="checkbox", name="promotion")
+                    li
+                        label Promo details
+                            textarea(name="promo_details")
+                    li
+                        input.btn.btn-primary.btn-success(type="submit", value="Save", name="save-point")

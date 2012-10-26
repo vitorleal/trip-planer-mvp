@@ -13,7 +13,7 @@ block content
                     - cities.forEach(function (city) {
                         li.mb.mb-big= city.city.name + ' - ' + city.country.name
                             .img-map
-                                form(action="/cityes", method="post")
+                                form(action="/cities", method="post")
                                     input(type="hidden", name="_method", value="delete")
                                     input(type="hidden", value=city._id, name="id")
                                     button.btn.btn-mini.btn-danger(title="remove this city", type="submit") X
@@ -28,7 +28,6 @@ block content
                         input(type="text", placeholder="Country", name="country")
                     li
                         input(type="text", placeholder="Country Geolocation", name="countryGeolocation")
-
                     li
                         input(type="text", placeholder="City", name="city")
                     li

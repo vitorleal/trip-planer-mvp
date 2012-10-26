@@ -9,22 +9,26 @@ block modal
 block content
     #side-map.side-map
         .side-map-content
-            h2 Your trip
-            dl
-                dt Destination
-                dd= destination.city.name + " - " + destination.country.name
+            h2= destination.city.name + " - " + destination.country.name
+            p.trip-infos
+                strong.mt Date
+                span= date(trip.date)
 
-                dt.mt Date
-                dd= date(trip.date)
+                strong.mt Days
+                span.trip-days= trip.days
 
-                dt.mt Days
-                dd= trip.days
+                strong.mt Intensity
+                span= trip.intensity
 
-                dt.mt Intensity
-                dd= trip.intensity
+        .days
+            - for (var i = 0, len = trip.days; i < len; i++) {
+                a.btn.btn-info(href="#", data-day=i): <i class="icon-calendar icon-white"></i> Day #{i+1}
+            - }
 
-            #showInfo
-                h2.title
+        #showInfo
+            h2.title
+            p.address
+            p.rate
 
     #map(data-lat=destination.city.geoLocation.lat, data-lng=destination.city.geoLocation.lng)
 

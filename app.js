@@ -142,14 +142,47 @@ tripSchema = new schema({
     hotel_id: String,
     intensity: String
 }),
-Trip = db.model('Trip', tripSchema);
+Trip = db.model('Trip', tripSchema),
+
+pointSchema = new schema({
+    city: String,
+    title: {
+        type: String,
+        default: "Untitled"
+    },
+    description: {
+        type: String,
+        default: "No description provided yet"
+    },
+    geoLocation: {
+        lat: String,
+        lng: String
+    },
+    category: {
+        type: String,
+        default: "no category"
+    },
+    promotion: {
+        type: Boolean,
+        default: false
+    },
+    address: {
+        type: String,
+        default: "no address"
+    },
+    promo_details: {
+        type: String,
+        default: "No details provided"
+    }
+}),
+Point = db.model('Point', pointSchema);
 
 
 //Passaport config
 passaportConifg = require('./configs/passaport.js')(passport, User);
 
 //Routes
-routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination, Trip);
+routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination, Trip, Point);
 
 
 // Create the server

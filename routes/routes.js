@@ -1,4 +1,4 @@
-module.exports = function(app, ensureAuthenticated, passport, User, Destination, Trip) {
+module.exports = function(app, ensureAuthenticated, passport, User, Destination, Trip, Point) {
 
     // Index
     app.get('/', function (req, res) {
@@ -68,9 +68,51 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
             });
         });
 
+
+    //Maps points
+    app.get('/points', function (req, res) {
+        Point.find({}, function (err, points) {
+            res.render('admin/points', {
+                title: 'Maps points',
+                description: 'Description of maps points',
+                points: points
+            });
+        });
+    });
+        //Add point post
+        app.post('/points', function (req, res) {
+            var point = new Point();
+
+            point.city            = req.body.city;
+            point.title           = req.body.title;
+            point.description     = req.body.description;
+            point.category        = req.body.category;
+            point.promotion       = req.body.promotion;
+            point.promo_details   = req.body.promo_details;
+            point.address         = req.body.address;
+            point.geoLocation.lat = req.body.latlng.split(',')[0];
+            point.geoLocation.lng = req.body.latlng.split(',')[1];
+
+            console.log(req.body);
+
+            point.save(function (err) {
+                if (err) { throw err; }
+                console.log('New point saved');
+                res.redirect('/points');
+            });
+        });
+        app.delete('/points', function (req, res) {
+            Point.findById(req.body.id, function (err, point) {
+                point.remove(function (err, point) {
+                    console.log('Point '+ point +' deleted');
+                    res.redirect('/points');
+                });
+            });
+        });
+
+
     //Profile
     app.get('/profile', ensureAuthenticated, function (req, res) {
-
         var query = User.findOne({ 'facebook_id': req.user.facebook_id });
 
         query.exec(function (err, oldUser) {
@@ -102,6 +144,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
         });
     });
 
+
     // Maps
     app.get('/map', ensureAuthenticated, function (req, res) {
         res.redirect('/profile#start');
@@ -132,6 +175,12 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
             });
         });
     });
+        app.get('/users/:city', function (req, res) {
+            User.find({ location: {'$regex': req.params.city } }, { facebook_id : 1, name: 1, email: 1 }, function (err, users) {
+
+                res.send(users);
+            });
+        });
 
     // Facebook auth routes
     app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_birthday', 'user_hometown', 'user_checkins' ] }),

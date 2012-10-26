@@ -1,3 +1,13 @@
+Array.prototype.chunk = function(chunkSize) {
+    var array=this;
+    return [].concat.apply([],
+        array.map(function(elem,i) {
+            return i%chunkSize ? [] : [array.slice(i,i+chunkSize)];
+        })
+    );
+}
+
+
 var maps = {
 
   map: null,
@@ -13,6 +23,7 @@ var maps = {
   zoom: 14,
   placesArray: [],
   markersArray: [],
+  daysArray: [],
 
 
 
@@ -34,7 +45,7 @@ var maps = {
 
     var request = {
       location: latlng,
-      radius: ' 5000'
+      radius: '6000'
     },
     places = new google.maps.places.PlacesService(this.map),
     self   = this;
@@ -50,11 +61,13 @@ var maps = {
 
   setMarker: function(latlng, map, place) {
     var self = this,
-    current = null,
-    marker = new google.maps.Marker({
+    marker   = new google.maps.Marker({
         position: latlng,
         map: map,
         title: place.name,
+        rate: place.rating,
+        address: place.vicinity,
+        id: place.id,
         animation: google.maps.Animation.DROP,
         icon: this.markers.blue,
         shadow: "images/pointer-shadow.png"
@@ -67,8 +80,7 @@ var maps = {
       self.center.lat = marker.position.Xa;
       self.center.lng = marker.position.Ya;
 
-      self.map.panTo(new google.maps.LatLng(marker.position.Xa, marker.position.Ya));
-
+      self.map.panTo(new google.maps.LatLng(marker.position.Ya, marker.position.Za));
       for (var i = 0, len = self.markersArray.length; i < len; i++) {
         self.markersArray[i].setIcon(self.markers.blue);
       }
@@ -76,8 +88,10 @@ var maps = {
       marker.setIcon(self.markers.red);
       marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
       $('#showInfo h2').text(marker.title);
-
+      $('#showInfo .address').text(marker.address);
+      $('#showInfo .rate').text(marker.rate);
     });
+
     // dbclick on marker
     google.maps.event.addListener(marker, 'dblclick', function () {
       self.map.setZoom(16);
@@ -90,10 +104,28 @@ var maps = {
     var self = this;
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      self.setMarker(new google.maps.LatLng(place.geometry.location.Xa, place.geometry.location.Ya), self.map, place);
+      self.setMarker(new google.maps.LatLng(place.geometry.location.Ya, place.geometry.location.Za), self.map, place);
 
       this.placesArray.push(place);
     }
+  },
+
+
+
+  clearMap: function() {
+    for (var i = 0; i < this.markersArray.length; i++ ) {
+      this.markersArray[i].setMap(null);
+    }
+    this.markersArray.length = 0;
+  },
+
+
+
+  showDay: function (totalDays, day) {
+    var pointsDays = maps.placesArray.chunk(Math.ceil(maps.placesArray.length/totalDays));
+
+    this.clearMap();
+    this.setMarkers(pointsDays[day]);
   },
 
 
@@ -123,6 +155,17 @@ $(function () {
 
   maps.resize();
 	google.maps.event.addDomListener(window, 'load', maps.init(lat, lng));
+
+
+  $('.days a').click(function () {
+    var totalDays = $('.trip-days').text(),
+        day       = $(this).data('day');
+
+    if (!$(this).hasClass('disabled')) {
+      maps.showDay(totalDays, day);
+      $(this).siblings().removeClass('disabled').end().addClass('disabled');
+    }
+  });
 });
 
 //resize map
