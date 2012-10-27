@@ -7,43 +7,142 @@ block append head
     script(src='/javascripts/profile.js')
 
 block banner
-    img.img-polaroid.img-profile(src="http://graph.facebook.com/#{facebook_id}/picture?type=large")
-    h2.name-profile= __('Welcome %s', name)
+    img.img-polaroid.img-profile(src="http://graph.facebook.com/#{user.facebook_id}/picture?type=large")
+    h2.name-profile= __('Welcome %s', user.name)
 
 block content
     .row
         dl.span7.offset1.dl-horizontal
             dt
                 i.icon-envelope(rel="tooltip", title="email")
-            dd= email
+            dd= user.email
 
             dt
                 i.icon-user(rel="tooltip", title="gender")
-            dd= gender
+            dd= user.gender
 
             dt
                 i.icon-globe(rel="tooltip", title="hometown")
-            dd= hometown
+            dd= user.hometown
 
             dt
                 i.icon-map-marker(rel="tooltip", title="location")
-            dd= location
+            dd= user.location
 
             dt
                 i.icon-gift(rel="tooltip", title="birthday")
-            dd= birthday
+            dd= user.birthday
             dt
                 i.icon-gift(rel="tooltip", title="age")
             dd
-                = yearsOld(birthday)
+                = yearsOld(user.birthday)
                 | #{__(' years old')}
 
             dt
                 i.icon-time(rel="tooltip", title="Joined")
-            dd
-                strong Joined -
-                = fromNow(createdAt)
+            dd  Joined #{fromNow(user.createdAt)}
 
         .span3.offset1.t-center
             h4 Start planning your trip
             a.btn.btn-primary.btn-large.btn-success(href="#", data-toggle="modal", data-target="#startModal"): <i class="icon-plane icon-white"></i> #{__('Start plan it')}
+
+
+    .row
+        - if(success.length){
+            .alert.alert-success.alert-block
+                button.close(type="button", data-dismiss="alert") ×
+                p= success
+        - }
+        h4.span12 Travel Interests
+        form(action="/profile", method="post")
+            .span3
+                    ul.unstyled
+                        li
+                            label Museums
+                            - var museums = [ ['modern_art', 'Modern Art'], ['archeology', 'Archeology'], ['science', 'Science'], ['classical_art', 'Classical Art'] ];
+                            select(name="museums")
+                                option -----
+                                - museums.forEach(function (val) {
+                                    - if (val[0] === user.interests.museums) {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - } else {
+                                        option(value=val[0])= val[1]
+                                    - }
+                                - })
+
+                        li
+                            label Outdoors
+                            - var outdoors = [ ['architechture', 'Architechture'], ['parks', 'Parks'], ['neighborhoods_intineraries', 'Special neighborhoods intineraries'] ];
+                            select(name="outdoors")
+                                option -----
+                                - outdoors.forEach(function (val) {
+                                    - if (val[0] === user.interests.outdoors) {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - } else {
+                                        option(value=val[0])= val[1]
+                                    - }
+                                - })
+
+            .span3
+                ul.unstyled
+                    li
+                            label Sports
+                            - var sports = [ ['football', 'Football'], ['rugby', 'Rugby'], ['tennis', 'Tennis'], ['basketball', 'Basketball'], ['volleyball', 'Volleyball'] ];
+                            select(name="sports")
+                                option -----
+                                - sports.forEach(function (val) {
+                                    - if (val[0] === user.interests.sports) {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - } else {
+                                        option(value=val[0])= val[1]
+                                    - }
+                                - })
+
+                        li
+                            label Nightlife
+                            - var nightlife = [ ['concerts', 'Concerts'], ['discos', 'Discos'], ['bars', 'Bars'], ['shows', 'Shows'] ];
+                            select(name="nightlife")
+                                option -----
+                                - nightlife.forEach(function (val) {
+                                    - if (val[0] === user.interests.nightlife) {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - } else {
+                                        option(value=val[0])= val[1]
+                                    - }
+                                - })
+
+            .span3
+                    ul.unstyled
+                        li
+                            label Type of trip
+                            - var typeTrip = [ ['cultural', 'Cultural trip'], ['fun', 'Fun trip'], ['relaxed', 'Relaxed trip'], ['moderated', 'Moderated trip'], ['intensive', 'Intensive'] ];
+                            select(name="type_trip")
+                                option -----
+                                - typeTrip.forEach(function (val) {
+                                    - if (val[0] === user.interests.type_trip) {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - } else {
+                                        option(value=val[0])= val[1]
+                                    - }
+                                - })
+
+                        li
+                            label Type of food
+                            - var typeFood = [ ['localfood', 'Local food'], ['international_food', 'International food'], ['asian_food', 'Asian food'], ['italian_food', 'Italian food'], ['french_food', 'French food'], ['fast_food', 'Fast food'], ['indian', 'Indian'], ['thai', 'Thai'], ['chinese', 'Chinese'], ['japanese', 'Japanese'] ];
+
+                            select(name="type_food")
+                                option -----
+                                - typeFood.forEach(function (val) {
+                                    - if (val[0] === user.interests.type_food) {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - } else {
+                                        option(value=val[0])= val[1]
+                                    - }
+                                - })
+
+                        li
+                            input(type="hidden", name="_method", value="put")
+                            input.btn.btn-primary(type="submit", value="Update profile", name="update-profile")
+
+
+

@@ -15,6 +15,7 @@
         "moment"          : "*",
         "passport"        : "*",
         "passport-fcebook": "*",
-        "i18n"            : "*"
+        "i18n"            : "*",
+        "connect-flash"   : "*"
     }
 }

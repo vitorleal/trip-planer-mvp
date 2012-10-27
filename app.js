@@ -14,6 +14,8 @@ var express = require("express"),
 
     passport         = require("passport"),
 
+    flash            = require('connect-flash'),
+
     app              = express();
 
 
@@ -38,6 +40,8 @@ app.configure(function () {
     }));
     app.use(passport.initialize());
     app.use(passport.session());
+
+    app.use(flash());
 
     app.use(app.router);
 
@@ -101,6 +105,14 @@ var userSchema = new schema({
     last_update: {
         type:    Date,
         default: Date.now
+    },
+    interests: {
+        museums:   String,
+        outdoors:  String,
+        sports:    String,
+        nightlife: String,
+        type_trip: String,
+        type_food: String
     }
 }),
 User = db.model('User', userSchema),

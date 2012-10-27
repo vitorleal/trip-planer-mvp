@@ -155,20 +155,30 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
             res.render('logged/profile', {
                 title: req.user.name + ' profile - Plan it',
                 description: 'Description of the profile page',
-                name: req.user.name,
-                email: req.user.email,
-                username: req.user.username,
-                facebook_id: req.user.facebook_id,
-                gender: req.user.gender,
-                hometown: req.user.hometown,
-                location: req.user.location,
-                birthday: req.user.birthday,
-                createdAt: req.user.created_at,
-                latsUpdate: req.user.last_update,
-                destinations: citys
+                user: req.user,
+                destinations: citys,
+                success: req.flash('success')
             });
         });
     });
+        app.put('/profile', ensureAuthenticated, function (req, res) {
+            User.findOne({ 'facebook_id': req.user.facebook_id }, function (err, user) {
+                user.interests.museums   = req.body.museums;
+                user.interests.outdoors  = req.body.outdoors;
+                user.interests.sports    = req.body.sports;
+                user.interests.nightlife = req.body.nightlife;
+                user.interests.type_trip = req.body.type_trip;
+                user.interests.type_food = req.body.type_food;
+
+                console.log(req.body);
+                user.save(function (err) {
+                    if (err) { throw err; }
+                    console.log('User updated');
+                    req.flash('success', 'Successfully updated!');
+                    res.redirect('/profile');
+                });
+            });
+        });
 
 
     // Maps
