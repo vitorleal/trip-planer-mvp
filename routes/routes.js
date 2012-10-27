@@ -71,7 +71,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
 
     //Maps points
     app.get('/points', function (req, res) {
-        Point.find({}, function (err, points) {
+        Point.find({ }, function (err, points) {
             res.render('admin/points', {
                 title: 'Maps points',
                 description: 'Description of maps points',
@@ -93,8 +93,6 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
             point.geoLocation.lat = req.body.latlng.split(',')[0];
             point.geoLocation.lng = req.body.latlng.split(',')[1];
 
-            console.log(req.body);
-
             point.save(function (err) {
                 if (err) { throw err; }
                 console.log('New point saved');
@@ -105,6 +103,34 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
             Point.findById(req.body.id, function (err, point) {
                 point.remove(function (err, point) {
                     console.log('Point '+ point +' deleted');
+                    res.redirect('/points');
+                });
+            });
+        });
+        app.get('/points/edit/:id', function (req, res) {
+            Point.findById(req.params.id, function (err, point) {
+                res.render('admin/points-edit', {
+                    title: 'Edit point',
+                    description: 'Description of maps points',
+                    point: point
+                });
+            });
+        });
+        app.put('/points/edit/:id', function (req, res) {
+            Point.findById(req.params.id, function (err, point) {
+                point.city            = req.body.city;
+                point.title           = req.body.title;
+                point.description     = req.body.description;
+                point.category        = req.body.category;
+                point.promotion       = req.body.promotion;
+                point.promo_details   = req.body.promo_details;
+                point.address         = req.body.address;
+                point.geoLocation.lat = req.body.latlng.split(',')[0];
+                point.geoLocation.lng = req.body.latlng.split(',')[1];
+
+                point.save(function (err) {
+                    if (err) { throw err; }
+                    console.log('Point updated');
                     res.redirect('/points');
                 });
             });

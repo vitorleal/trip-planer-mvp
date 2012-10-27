@@ -14,32 +14,32 @@ block content
     .row
         dl.span7.offset1.dl-horizontal
             dt
-                i.icon-envelope
+                i.icon-envelope(rel="tooltip", title="email")
             dd= email
 
             dt
-                i.icon-user
+                i.icon-user(rel="tooltip", title="gender")
             dd= gender
 
             dt
-                i.icon-globe
+                i.icon-globe(rel="tooltip", title="hometown")
             dd= hometown
 
             dt
-                i.icon-map-marker
+                i.icon-map-marker(rel="tooltip", title="location")
             dd= location
 
             dt
-                i.icon-gift
+                i.icon-gift(rel="tooltip", title="birthday")
             dd= birthday
             dt
-                i.icon-gift
+                i.icon-gift(rel="tooltip", title="age")
             dd
                 = yearsOld(birthday)
                 | #{__(' years old')}
 
             dt
-                i.icon-time
+                i.icon-time(rel="tooltip", title="Joined")
             dd
                 strong Joined -
                 = fromNow(createdAt)

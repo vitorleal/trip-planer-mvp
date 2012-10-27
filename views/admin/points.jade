@@ -9,14 +9,16 @@ block content
                 span.muted  (#{points.length})
 
             - if (points)
-                ol
+                ol.list-points
                     - points.forEach(function (point) {
-                        li.mb.mb-big
-                            h3= point.title
+                        li
+                            h3
+                                a(href="/points/edit/"+point._id, rel="tooltip", title="Edit this point")= point.title
+
                             form(action="/points", method="post")
                                 input(type="hidden", name="_method", value="delete")
                                 input(type="hidden", value=point._id, name="id")
-                                button.btn.btn-mini.btn-danger(title="remove " + point.title , type="submit") X
+                                button.btn.btn-mini.btn-danger(title="remove " + point.title , rel="tooltip", title="Delete this point", type="submit") X
                     - })
 
         .span3
@@ -31,27 +33,12 @@ block content
                             textarea(name="description")
                     li
                         label Category
+                            - var categorys = [ ['airport', 'airport'], ['amusement_park', 'amusement park'], ['art_gallery', 'art gallery'], ['bank', 'bank'], ['bar', 'bar'], ['bicycle_store', 'bicycle store'], ['cafe', 'cafe'], ['car_rental', 'car rental'], ['casino', 'casino'], ['food', 'food'], ['museum', 'museum'], ['night_club', 'night club'], ['park', 'park'], ['restaurant', 'restaurant'], ['stadium', 'stadium'], ['subway_station', 'subway station'], ['store', 'store'], ['zoo', 'zoo'] ];
                             select(name="category")
                                 option(value="no category") ---
-                                option(value="airport") airport
-                                option(value="amusement_park") amusement park
-                                option(value="art_gallery") art gallery
-                                option(value="bank") bank
-                                option(value="bar") bar
-                                option(value="bicycle_store") bicycle store
-                                option(value="book_store") book store
-                                option(value="cafe") cafe
-                                option(value="car_rental") car rental
-                                option(value="casino") casino
-                                option(value="food") food
-                                option(value="museum") museum
-                                option(value="night_club") night club
-                                option(value="park") park
-                                option(value="restaurant") restaurant
-                                option(value="stadium") stadium
-                                option(value="subway_station") subway station
-                                option(value="store") store
-                                option(value="zoo") zoo
+                                - categorys.forEach(function(category) {
+                                    option(value=category[0])= category[1]
+                                - })
                     li
                         label City
                             select(name="city")

@@ -1,0 +1,55 @@
+extends ../layout-inside
+
+block content
+    h2= title
+
+    .row
+        .span9
+            h3 #{point.title}
+
+            .span3
+                form(action="/points/edit/"+point._id, method="post")
+                    ul.unstyled
+                        li
+                            label Title
+                                input(type="text", name="title", value=point.title)
+                        li
+                            label Description
+                                textarea(name="description")= point.description
+                        li
+                            label Category
+                            - var categorys = [ ['airport', 'airport'], ['amusement_park', 'amusement park'], ['art_gallery', 'art gallery'], ['bank', 'bank'], ['bar', 'bar'], ['bicycle_store', 'bicycle store'], ['cafe', 'cafe'], ['car_rental', 'car rental'], ['casino', 'casino'], ['food', 'food'], ['museum', 'museum'], ['night_club', 'night club'], ['park', 'park'], ['restaurant', 'restaurant'], ['stadium', 'stadium'], ['subway_station', 'subway station'], ['store', 'store'], ['zoo', 'zoo'] ];
+                                select(name="category")
+                                    option(value="no category") ---
+                                    - categorys.forEach(function(category) {
+                                        - if (category[0] === point.category) {
+                                            option(value=category[0], selected="selected")= category[1]
+                                        - } else {
+                                            option(value=category[0])= category[1]
+                                        - }
+
+                                    - })
+                        li
+                            label City
+                                select(name="city")
+                                    option(value="Madrid") Madrid
+                        li
+                            label Geolocation
+                                input(type="text", name="latlng", value=point.geoLocation.lat+','+point.geoLocation.lng)
+                        li
+                            label Address
+                                input(type="text", name="address", value=point.address)
+                        li
+                            label Have Promotion?
+                                .check
+                                    - if(point.promotion) {
+                                        input(type="checkbox", name="promotion", checked="checked")
+                                    - } else {
+                                        input(type="checkbox", name="promotion")
+                                    - }
+                        li
+                            label Promo details
+                                textarea(name="promo_details")= point.promo_details
+                        li
+                            input(type="hidden", name="_method", value="put")
+                            input.btn.btn-primary.btn-success(type="submit", value="Save", name="save-point")

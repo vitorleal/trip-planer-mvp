@@ -95,6 +95,15 @@ header .container .nav {
   left: 295px;
   top: -6px;
 }
+.list-points h3 {
+  display: inline-block;
+  margin-right: 10px;
+}
+.list-points form {
+  display: inline-block;
+  margin-top: -8px;
+  vertical-align: middle;
+}
 #map {
   float: left;
   margin-top: 55px;
