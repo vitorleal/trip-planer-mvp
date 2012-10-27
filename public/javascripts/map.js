@@ -138,7 +138,6 @@ var maps = {
     $('#days-plan').html('');
 
     $.each(pointsDays[day], function (key, val) {
-      console.log(val);
       $('#days-plan').append('<li class="id-'+ val.id +'"><h5>'+ val.name +'</h5><small class="muted">'+ val.vicinity +'</small></li>');
     });
   },
@@ -172,6 +171,7 @@ $(function () {
 	google.maps.event.addDomListener(window, 'load', maps.init(lat, lng));
 
 
+  //Click in the day and show the plan
   $('.days a').click(function () {
     var totalDays = $('.trip-days').text(),
         day       = $(this).data('day');
@@ -183,19 +183,30 @@ $(function () {
   });
 
 
+  //Get list of friends
   $.getJSON('users/Madrid', function(users) {
-     if (users.length) {
-       $.each(users, function (key, val) {
+    if (users) {
+      $.each(users, function (key, val) {
+        if(val.name !== $('.userName').text()) {
           $('#users').append('<div class="user">\
-            <a href="#" rel="popover" data-original-title="'+ val.name +'" data-content="'+ val.name.split(' ')[0] +' lives here, contact him! '+ val.email +'" data-trigger="hover">\
+            <a href="#" rel="popover" data-original-title="'+ val.name +'" data-content="'+ val.name.split(' ')[0] +' lives here! '+ val.email +'" data-trigger="hover">\
               <img class="img-polaroid" src="http://graph.facebook.com/'+ val.facebook_id +'/picture?type=small"/>\
             </a>\
           </div>');
-        });
-        $('.user a').popover();
-        $('#users').delay(1500).fadeIn();
-     }
+        }
+      });
+
+      $('.user a').popover();
+      $('#users').delay(1500).fadeIn();
+    }
   });
+
+  //save places in the database
+  // $.each(maps.placesArray, function (key, place) {
+  //   $.post("/points", { city: "Madrid", title: place.name, address: place.vicinity, latlng: place.geometry.location.Ya +','+ place.geometry.location.Za } );
+  // });
+
+
 });
 
 //resize map

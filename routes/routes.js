@@ -107,15 +107,15 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
                 });
             });
         });
-        app.get('/points/edit/:id', function (req, res) {
-            Point.findById(req.params.id, function (err, point) {
-                res.render('admin/points-edit', {
-                    title: 'Edit point',
-                    description: 'Description of maps points',
-                    point: point
-                });
+    app.get('/points/edit/:id', function (req, res) {
+        Point.findById(req.params.id, function (err, point) {
+            res.render('admin/points-edit', {
+                title: 'Edit point',
+                description: 'Description of maps points',
+                point: point
             });
         });
+    });
         app.put('/points/edit/:id', function (req, res) {
             Point.findById(req.params.id, function (err, point) {
                 point.city            = req.body.city;

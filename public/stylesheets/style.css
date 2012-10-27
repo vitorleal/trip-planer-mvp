@@ -143,7 +143,10 @@ header .container .nav {
 }
 .side-map #users .user {
   display: inline-block;
-  margin-right: 10px;
+  margin: 0 10px 10px 0;
+}
+.side-map #users .user img {
+  max-height: 40px;
 }
 .side-map #days-plan {
   border-bottom: dashed 1px #c2c2c2;

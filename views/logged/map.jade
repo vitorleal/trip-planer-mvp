@@ -11,6 +11,7 @@ block content
         .side-map-content
             h2= destination.city.name + " - " + destination.country.name
             p.trip-infos
+                strong.hide.userName= user.name
                 strong.mt Date
                 span= date(trip.date)
 
