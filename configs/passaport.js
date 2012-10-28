@@ -3,8 +3,12 @@ module.exports = function(passport, User) {
     var facebookStrategy = require("passport-facebook").Strategy;
 
     // Facebook auth
-    //clientID    : '547560318604399', localhost app
-    //clientSecret: 'c8c65f46c7e3807e8ac5e8cca0e3f942', localhost app
+    // clientID    : '547560318604399', LOCALHOST
+    // clientSecret: 'c8c65f46c7e3807e8ac5e8cca0e3f942', LOCALHOST
+
+    // clientID    : '112711522214518',
+    // clientSecret: 'f6a03086d3530372c5715458b7ef9563',
+
     passport.use(new facebookStrategy({
             clientID    : '112711522214518',
             clientSecret: 'f6a03086d3530372c5715458b7ef9563',
