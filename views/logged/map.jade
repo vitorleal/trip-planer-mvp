@@ -1,5 +1,8 @@
 extends ../layout-map
 
+block modal
+    include ../includes/utils/modals/modal-map-details.jade
+
 block append head
     script(src='https://maps.google.com/maps/api/js?&libraries=places&key=AIzaSyCABzxHhmqMf_Ty8MzdGeDfD1JPK482cNE&sensor=false')
     script(src='/javascripts/map.js')
@@ -9,17 +12,12 @@ block modal
 block content
     #side-map.side-map
         .side-map-content
-            h2= destination.city.name + " - " + destination.country.name
+            h2= destination.city.name
+                small= " - Date: " + date(trip.date)
+
             p.trip-infos
                 strong.hide.userName= user.name
-                strong.mt Date
-                span= date(trip.date)
-
-                strong.mt Days
-                span.trip-days= trip.days
-
-                strong.mt Intensity
-                span= trip.intensity
+                span.hide.trip-days= trip.days
 
         .days
             - for (var i = 0, len = trip.days; i < len; i++) {

@@ -1,0 +1,28 @@
+#detailsModal.modal.hide.fade
+    .modal-header
+        h3 Details of your trip
+
+    .modal-body
+        dl.dl-horizontal
+            dt.mb
+                strong.control-label Date
+            dd.mb= date(trip.date)
+
+            dt.mb
+                strong.control-label Days
+            dd.mb= trip.days
+
+            dt.mb
+                strong.control-label Intenity
+            dd.mb= trip.intensity
+
+            dt.mb
+                strong.control-label With who
+            dd.mb= trip.withWho
+
+            dt.mb
+                strong.control-label First time?
+            dd.mb= trip.firstTime
+
+    .modal-footer
+        a.btn.btn-primary(href="#", data-dismiss="modal") Close

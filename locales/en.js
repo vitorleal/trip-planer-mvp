@@ -15,5 +15,9 @@
 	"years old": "years old",
 	"Start plan it": "Start plan it",
 	"start planit": "start planit",
-	"start plan it": "start plan it"
+	"start plan it": "start plan it",
+	"print your trip": "print your trip",
+	"save your trip": "save your trip",
+	"your profile": "your profile",
+	"about your trip": "about your trip"
 }

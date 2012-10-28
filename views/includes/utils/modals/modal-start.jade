@@ -7,7 +7,7 @@
                 .control-group.mt
                     lable.control-label Choose a destination
                     .controls
-                        select(name="destination")
+                        select(name="destination", required="required")
                             option(value="") ------
                             - destinations.forEach(function (city) {
                                 option(value=city._id)= city.city.name
@@ -16,21 +16,50 @@
                 .control-group
                     lable.control-label Choose a date
                     .controls
-                        input(type="date", name="date")
+                        input(type="date", name="date", required="required")
 
                 .control-group
                     lable.control-label How many days?
                     .controls
-                        input(type="number", value="3", min="1", max="7", name="days")
+                        input(type="number", value="3", min="1", max="7", name="days", required="required")
 
                 .control-group
-                    lable.control-label Intensity
+                    lable.control-label Type of trip
                     .controls
+                        - var typeTripModal = [ ['Cultural trip', 'Cultural trip'], ['Fun trip', 'Fun trip'], ['Relaxed trip', 'Relaxed trip'], ['Moderated trip', 'Moderated trip'], ['Intensive', 'Intensive'] ];
                         select(name="intensity")
-                            option(value="Relaxed") Relaxed
-                            option(value="Moderate") Moderate
-                            option(value="Vigorous") Vigorous
-                            option(value="Extreme") Extreme
+                            option -----
+                            - typeTripModal.forEach(function (val) {
+                                - if (val[0] === user.interests.type_trip) {
+                                    option(value=val[0], selected="selected")= val[1]
+                                - } else {
+                                    option(value=val[0])= val[1]
+                                - }
+                            - })
+
+                .control-group
+                    lable.control-label With who you are going?
+                    .controls
+                        - if (user.gender === "male") {
+                            - var withWho = [ ['Alone', 'Alone'], ['With Friends', 'With Friends'], ['With Family', 'With Family'], ['With Girlfriend/Wife', 'With Girlfriend/Wife'] ];
+                        - } else {
+                            - var withWho = [ ['Alone', 'Alone'], ['With Friends', 'With Friends'], ['With Family', 'With Family'], ['With Boyfriend/Husband', 'With Boyfriend/Husband'] ];
+                        - }
+                        select(name="with_who", required="required")
+                            option -----
+                            - withWho.forEach(function (val) {
+                                option(value=val[0])= val[1]
+                            - })
+
+                .control-group
+                    lable.control-label First time there?
+                    .controls
+                        label.radio
+                            input(type="radio", value="Yes", checked="checked", name="first_time")
+                            span Yes
+                        label.radio
+                            input(type="radio", value="No", name="first_time")
+                            span No
 
         .modal-footer
             a.btn(href="#", data-dismiss="modal") Cancel

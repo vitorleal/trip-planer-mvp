@@ -206,7 +206,9 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
                 trip: {
                     date: req.body.date,
                     days: req.body.days,
-                    intensity: req.body.intensity
+                    intensity: req.body.intensity,
+                    withWho: req.body.with_who,
+                    firstTime: req.body.first_time
                 }
             });
         });

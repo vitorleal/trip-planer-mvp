@@ -48,6 +48,9 @@ header .container .nav {
   margin-top: 7px;
   margin-left: 20px;
 }
+header .buttons-header.btn-group {
+  margin: 11px 0 0 30px;
+}
 .subhead {
   height: 245px;
   width: 100%;
