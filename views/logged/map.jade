@@ -13,7 +13,8 @@ block content
     #side-map.side-map
         .side-map-content
             h2= destination.city.name
-                small= " - Date: " + date(trip.date)
+                small  - Date:
+                    span.datePlan= date(trip.date)
 
             p.trip-infos
                 strong.hide.userName= user.name
@@ -21,7 +22,7 @@ block content
 
         .days
             - for (var i = 0, len = trip.days; i < len; i++) {
-                a.btn.btn-info.btn-small(href="#", data-day=i): <i class="icon-calendar icon-white"></i> Day #{i+1}
+                a.btn.btn-info.btn-small(href="#", data-day=i, data-date=date(addDays(trip.date, i))): <i class="icon-calendar icon-white"></i> Day #{i+1}
             - }
 
         ol#days-plan

@@ -66,6 +66,9 @@ app.configure(function () {
                 birthyear = new Date(birthday).getFullYear();
 
             return (year - birthyear);
+        },
+        addDays: function(date, days) {
+            return moment(date).add('days', days);
         }
     });
 });

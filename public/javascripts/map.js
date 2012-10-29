@@ -380,6 +380,7 @@ $(function () {
       maps.showDay(day);
       $(this).siblings().removeClass('disabled').end().addClass('disabled');
     }
+    $('.datePlan').text($(this).data('date'));
   }).first().click();
 
 
