@@ -1,5 +1,4 @@
 $(function () {
-
     //Active dropdown menus
     $('.dropdown-toggle').dropdown();
 
@@ -9,7 +8,7 @@ $(function () {
     //Remove alerts
     if ($(".alert")) {
         setTimeout(function() {
-            $(".alert").alert('close')
+            $(".alert").alert('close');
         }, 3500);
     }
 });

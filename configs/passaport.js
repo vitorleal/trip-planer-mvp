@@ -1,17 +1,10 @@
-module.exports = function(passport, User) {
+module.exports = function(passport, User, facebookId, facebookSecret) {
 
     var facebookStrategy = require("passport-facebook").Strategy;
 
-    // Facebook auth
-    // clientID    : '547560318604399', LOCALHOST
-    // clientSecret: 'c8c65f46c7e3807e8ac5e8cca0e3f942', LOCALHOST
-
-    // clientID    : '112711522214518',
-    // clientSecret: 'f6a03086d3530372c5715458b7ef9563',
-
     passport.use(new facebookStrategy({
-            clientID    : '112711522214518',
-            clientSecret: 'f6a03086d3530372c5715458b7ef9563',
+            clientID    : facebookId,
+            clientSecret: facebookSecret,
             callbackURL : "/auth/facebook/callback"
         },
         function (accessToken, refreshToken, profile, done) {
@@ -55,10 +48,4 @@ module.exports = function(passport, User) {
             done(err, user);
         });
     });
-    ensureAuthenticated = function (req, res, next) {
-        if (req.isAuthenticated()) {
-            return next();
-        }
-        res.redirect('/');
-    }
-}
+};

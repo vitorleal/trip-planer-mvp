@@ -1,13 +1,3 @@
-Array.prototype.chunk = function(chunkSize) {
-    var array=this;
-    return [].concat.apply([],
-        array.map(function(elem,i) {
-            return i%chunkSize ? [] : [array.slice(i,i+chunkSize)];
-        })
-    );
-}
-
-
 var maps = {
 
   days: [
@@ -312,7 +302,7 @@ var maps = {
     self = this;
 
     this.directionsService.route(request, function (result, status) {
-      if (status == google.maps.DirectionsStatus.OK) {
+      if (status === google.maps.DirectionsStatus.OK) {
         self.directionsDisplay.setDirections(result);
       }
     });
@@ -389,11 +379,7 @@ $(function () {
     if (users) {
       $.each(users, function (key, val) {
         if(val.name !== $('.userName').text()) {
-          $('#users').append('<div class="user">\
-            <a href="#" rel="popover" data-original-title="'+ val.name +'" data-content="'+ val.name.split(' ')[0] +' lives here! '+ val.email +'" data-trigger="hover">\
-              <img class="img-polaroid" src="http://graph.facebook.com/'+ val.facebook_id +'/picture?type=small"/>\
-            </a>\
-          </div>');
+          $('#users').append('<div class="user"><a href="#" rel="popover" data-original-title="'+ val.name +'" data-content="'+ val.name.split(' ')[0] +' lives here! '+ val.email +'" data-trigger="hover"><img class="img-polaroid" src="http://graph.facebook.com/'+ val.facebook_id +'/picture?type=small"/></a></div>');
         }
       });
 

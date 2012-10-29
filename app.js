@@ -1,4 +1,3 @@
-
 // Module dependencies
 var express = require("express"),
 
@@ -45,11 +44,6 @@ app.configure(function () {
 
     app.use(app.router);
 
-    app.use(require('less-middleware')({
-        src: __dirname + '/public',
-        enable: ['less']
-    }));
-
     app.use(express.static(path.join(__dirname, 'public')));
 
     app.use(i18n.init);
@@ -76,10 +70,27 @@ app.configure(function () {
 // Dev Config
 app.configure('development', function () {
     app.use(express.errorHandler());
+    //Data passing to the passparot configuration in /config/passaport.js
+    app.set('facebookId', '547560318604399');
+    app.set('facebookSecret', 'c8c65f46c7e3807e8ac5e8cca0e3f942');
+
+    app.use(require('less-middleware')({
+        src: __dirname + '/public',
+        enable: ['less']
+    }));
 });
 
 app.configure('production', function () {
     app.use(express.errorHandler());
+    //Data passing to the passparot configuration in /config/passaport.js
+    app.set('facebookId', '112711522214518');
+    app.set('facebookSecret', 'f6a03086d3530372c5715458b7ef9563');
+
+    app.use(require('less-middleware')({
+        src: __dirname + '/public',
+        enable: ['less'],
+        compress: true
+    }));
 });
 
 
@@ -194,15 +205,22 @@ Point = db.model('Point', pointSchema);
 
 
 //Passaport config
-passaportConifg = require('./configs/passaport.js')(passport, User);
+var passaportConifg     = require('./configs/passaport.js')(passport, User, app.get('facebookId'), app.get('facebookSecret')),
+    ensureAuthenticated = function (req, res, next) {
+        if (req.isAuthenticated()) {
+            return next();
+        }
+        res.redirect('/');
+    };
+
 
 //Routes
-routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination, Trip, Point);
+var routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination, Trip, Point);
 
 
 // Create the server
 http.createServer(app).listen(app.get('port'), function() {
-    console.log("Express server listening on port %s in %s environment", app.get('port'), process.env.NODE_ENV);
+    console.log("Express server listening on port %s in %s environment with facebook id %s", app.get('port'), process.env.NODE_ENV, app.get('facebookId'));
 });
 
 
