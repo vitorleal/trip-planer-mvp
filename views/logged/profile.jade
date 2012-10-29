@@ -47,13 +47,14 @@ block content
             a.btn.btn-primary.btn-large.btn-success(href="#", data-toggle="modal", data-target="#startModal"): <i class="icon-plane icon-white"></i> #{__('Start plan it')}
 
 
+    - if(success.length){
+        .alert.alert-success.alert-block.fade.in
+            button.close(type="button", data-dismiss="alert") ×
+            p
+                strong #{success}
+    - }
+
     .row
-        - if(success.length){
-            .alert.alert-success.alert-block.fade.in
-                button.close(type="button", data-dismiss="alert") ×
-                p
-                    strong #{success}
-        - }
         h4.span12 Travel preferences
         form(action="/profile", method="post")
             .span12
