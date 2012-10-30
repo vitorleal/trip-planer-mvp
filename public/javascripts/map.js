@@ -174,8 +174,8 @@ var maps = {
         "title": "SkyDive Madrid",
         "description": "A tandem skydive is the easy way to try out skydiving with little responsibility. Myself and my colleagues will do the work your job will be to enjoy the view as we freefall at about 130 miles per hour.",
         "geo": {
-          "lat": "40.45948689837197",
-          "lng": "-3.4881591796875"
+          "lat": "40.41999808561473",
+          "lng": "-3.6989593505859375"
         },
         "address": "Carretera A-4, Km 64.400, 4, 45300 Ocaña, Toledo, Toledo, Spain"
       },
@@ -230,7 +230,7 @@ var maps = {
 
 
 
-  setMarker: function(latlng, map, place) {
+  setMarker: function(latlng, map, place, index) {
     var self = this,
     marker   = new google.maps.Marker({
         position: latlng,
@@ -238,6 +238,7 @@ var maps = {
         title: place.title,
         address: place.address,
         description: place.description,
+        id: index,
         animation: google.maps.Animation.DROP,
         icon: this.markers.blue,
         shadow: "images/pointer-shadow.png"
@@ -261,12 +262,25 @@ var maps = {
       marker.setIcon(self.markers.red);
       marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
 
-      $('.id-'+ marker.id).siblings().removeClass('text-error').end().addClass('text-error');
+      $('.id-'+ marker.id).siblings().removeClass('open').find('.description').slideUp();
+      $('.id-'+ marker.id).addClass('open').find('.description').slideDown();
     });
 
     // dbclick on marker
     google.maps.event.addListener(marker, 'dblclick', function () {
       self.map.setZoom(16);
+    });
+
+    google.maps.event.addListener(marker, 'mouseover', function () {
+      for (var i = 0, len = self.markersArray.length; i < len; i++) {
+        self.markersArray[i].setIcon(self.markers.blue);
+      }
+
+      marker.setIcon(self.markers.red);
+      marker.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+
+      $('.id-'+ marker.id).siblings().removeClass('open').find('.description').slideUp();
+      $('.id-'+ marker.id).addClass('open').find('.description').slideDown();
     });
   },
 
@@ -275,7 +289,7 @@ var maps = {
     var self = this;
     for (var i = 0; i < results.length; i++) {
       var place = results[i];
-      self.setMarker(new google.maps.LatLng(place.geo.lat, place.geo.lng), self.map, place);
+      self.setMarker(new google.maps.LatLng(place.geo.lat, place.geo.lng), self.map, place, i);
 
       self.wayPoints.push({
         location: new google.maps.LatLng(place.geo.lat, place.geo.lng),
@@ -329,8 +343,10 @@ var maps = {
     $('#days-plan').html('');
 
     $.each(pointsDays, function (key, val) {
-      $('#days-plan').append('<li class=""><h5>'+ val.title +'</h5><small class="muted">'+ val.address +'</small></li>');
+      $('#days-plan').append('<li class="id-'+ key +'" data-id="'+ key +'"><h5>'+ (key + 1) +'. '+ val.title +'</h5><button class="btn btn-small btn-danger btn-remove" title="remove '+ val.title +'" rel="tooltip"><i class="icon icon-remove icon-white"></i></button><p class="description">'+ val.description +'</p><small class="muted address">'+ val.address +'</small></li>');
     });
+
+    $('[rel="tooltip"]').tooltip();
   },
 
 
@@ -341,6 +357,7 @@ var maps = {
         lng = this.center.lng;
 
     $('#map').height(h);
+    $('#side-map').css('max-height', h);
 
     if (this.map) {
       this.map.panTo(new google.maps.LatLng(lat, lng));
@@ -363,7 +380,7 @@ $(function () {
 
 
   //Click in the day and show the plan
-  $('.days a').click(function () {
+  $('.days .change-days').click(function () {
     var day = $(this).data('day');
 
     if (!$(this).hasClass('disabled')) {
@@ -372,6 +389,33 @@ $(function () {
     }
     $('.datePlan').text($(this).data('date'));
   }).first().click();
+
+  //Open the show more
+  $('#days-plan li').live('click', function () {
+    var markerSelected,
+      targuet = $(this);
+    targuet.siblings().removeClass('open').find('.description').slideUp();
+    targuet.addClass('open').find('.description').slideDown();
+
+    $.each(maps.markersArray, function (i, marker) {
+      if (marker.id === targuet.data('id')) {
+        markerSelected = marker;
+      }
+    });
+
+    if (markerSelected) {
+      maps.center.lat = markerSelected.position.Xa;
+      maps.center.lng = markerSelected.position.Ya;
+
+      maps.map.panTo(new google.maps.LatLng(markerSelected.position.Ya, markerSelected.position.Za));
+        for (var i = 0, len = maps.markersArray.length; i < len; i++) {
+          maps.markersArray[i].setIcon(maps.markers.blue);
+        }
+
+      markerSelected.setIcon(maps.markers.red);
+      markerSelected.setZIndex(google.maps.Marker.MAX_ZINDEX + 1);
+    }
+  });
 
 
   //Get list of friends

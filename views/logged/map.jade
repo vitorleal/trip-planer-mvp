@@ -22,10 +22,12 @@ block content
 
         .days
             - for (var i = 0, len = trip.days; i < len; i++) {
-                a.btn.btn-info.btn-small(href="#", data-day=i, data-date=date(addDays(trip.date, i))): <i class="icon-calendar icon-white"></i> Day #{i+1}
+                a.btn.btn-info.btn-small.change-days(href="#", title=date(addDays(trip.date, i)), rel="tooltip", data-day=i, data-date=date(addDays(trip.date, i))): <i class="icon-calendar icon-white"></i> Day #{i+1}
             - }
+                a.btn.btn-small.btn-success(href="#", title="add more days", rel="tooltip")
+                    i.icon-plus-sign.icon-white
 
-        ol#days-plan
+        ul#days-plan.unstyled
 
         #showInfo
             h2.title

@@ -147,6 +147,7 @@ header .buttons-header.btn-group { margin: 11px 0 0 30px; }
   min-height: 100%;
   width: 25%;
   position: relative;
+  overflow: auto;
 
   .side-map-content {
     padding: 15px 15px 0 15px;
@@ -182,23 +183,58 @@ header .buttons-header.btn-group { margin: 11px 0 0 30px; }
   }
 
   #days-plan {
-    border-bottom: dashed 1px rgb(194, 194, 194);
-    margin: 25px 15px;
-    padding: 0 0 15px 20px;
+    margin: 25px 0 25px 0;
+    padding: 0 0 15px 0;
 
     li {
+      cursor: pointer;
+      padding: 10px 20px 12px 15px;
+      border-left: solid 5px @blue;
+      border-bottom: dashed 1px rgb(194, 194, 194);
+      position: relative;
 
-      h5 {
-        margin-bottom: 0;
+      &:last-child {
+        border-bottom: none;
       }
 
-      .muted {
+      .btn-remove {
+        position: absolute;
+        right: 20px;
+        top: 10px;
+        padding: 0 2px;
         display: none;
       }
 
-      &.text-error {
+      h5 {
+        margin: 0;
+      }
 
-        .muted { display: block; }
+      .description {
+        font-size: 12px;
+        line-height: 18px;
+        padding-left: 15px;
+        display: none;
+      }
+
+      .address {
+        padding-left: 15px;
+      }
+
+      &:hover {
+        background: @white;
+        .transition(background .5s);
+
+        .btn-remove {
+          display: block;
+        }
+      }
+      &.open {
+        border-left-color: @btnDangerBackgroundHighlight;
+        background: @white;
+
+        &:hover {
+          cursor: default;
+        }
       }
     }
 

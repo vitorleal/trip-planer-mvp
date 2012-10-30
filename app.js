@@ -223,4 +223,4 @@ http.createServer(app).listen(app.get('port'), function() {
 
 
 //To start the enviroments
-//NODE_ENV=production forever app.js
+//NODE_ENV=production forever start app.js
