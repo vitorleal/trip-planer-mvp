@@ -19,6 +19,26 @@
                         input(type="date", name="date", required="required")
 
                 .control-group
+                    lable.control-label Starting time
+                    .controls
+                        - var start = [ ['06:00'], ['06:30'], ['07:00'], ['07:30'], ['08:00'], ['08:30'], ['09:00'], ['09:30'], ['10:00'], ['10:30'], ['11:00'], ['11:30'], ['12:00'], ['12:30'], ['13:00'], ['13:30'], ['14:00'], ['14:30'], ['15:00'], ['15:30'], ['16:00'], ['16:30'], ['17:00'], ['17:30'], ['18:00'], ['18:30'], ['19:00'], ['19:30'], ['20:00'], ['20:30'], ['21:00'], ['21:30'], ['22:00'], ['22:30'], ['23:00'], ['23:30'], ['00:00'], ['00:30'], ['01:00'], ['01:30'], ['02:00'], ['02:30'], ['03:00'], ['03:30'], ['04:00'], ['04:30'], ['05:00'], ['05:30'] ];
+                        select(name="start", required="required")
+                            option -----
+                            - start.forEach(function (val) {
+                                option(value=val[0])= val[0]
+                            - })
+
+                .control-group
+                    lable.control-label Ending time
+                    .controls
+                        - var end = [ ['06:00'], ['06:30'], ['07:00'], ['07:30'], ['08:00'], ['08:30'], ['09:00'], ['09:30'], ['10:00'], ['10:30'], ['11:00'], ['11:30'], ['12:00'], ['12:30'], ['13:00'], ['13:30'], ['14:00'], ['14:30'], ['15:00'], ['15:30'], ['16:00'], ['16:30'], ['17:00'], ['17:30'], ['18:00'], ['18:30'], ['19:00'], ['19:30'], ['20:00'], ['20:30'], ['21:00'], ['21:30'], ['22:00'], ['22:30'], ['23:00'], ['23:30'], ['00:00'], ['00:30'], ['01:00'], ['01:30'], ['02:00'], ['02:30'], ['03:00'], ['03:30'], ['04:00'], ['04:30'], ['05:00'], ['05:30'] ];
+                        select(name="end", required="required")
+                            option -----
+                            - end.forEach(function (val) {
+                                option(value=val[0])= val[0]
+                            - })
+
+                .control-group
                     lable.control-label How many days?
                     .controls
                         input(type="number", value="3", min="1", max="7", name="days", required="required")
@@ -26,25 +46,27 @@
                 .control-group
                     lable.control-label Type of trip
                     .controls
-                        - var typeTripModal = [ ['Cultural trip', 'Cultural trip'], ['Fun trip', 'Fun trip'], ['Relaxed trip', 'Relaxed trip'], ['Moderated trip', 'Moderated trip'], ['Intensive', 'Intensive'] ];
-                        select(name="intensity")
+                        - var typeTripModal = [ ['Touristic', 'Touristic'], ['Cultural', 'Cultural'], ['Romantic', 'Romantic'], ['Bachelor trip', 'Bachelor trip'], ['Fun', 'Fun'] ];
+                        select(name="type_trip", required="required")
                             option -----
                             - typeTripModal.forEach(function (val) {
-                                - if (val[0] === user.interests.type_trip) {
-                                    option(value=val[0], selected="selected")= val[1]
-                                - } else {
-                                    option(value=val[0])= val[1]
-                                - }
+                                option(value=val[0])= val[1]
                             - })
 
                 .control-group
-                    lable.control-label With who you are going?
+                    lable.control-label intensity
                     .controls
-                        - if (user.gender === "male") {
-                            - var withWho = [ ['Alone', 'Alone'], ['With Friends', 'With Friends'], ['With Family', 'With Family'], ['With Girlfriend/Wife', 'With Girlfriend/Wife'] ];
-                        - } else {
-                            - var withWho = [ ['Alone', 'Alone'], ['With Friends', 'With Friends'], ['With Family', 'With Family'], ['With Boyfriend/Husband', 'With Boyfriend/Husband'] ];
-                        - }
+                        - var intensity = [ ['Relaxed', 'Relaxed'], ['Moderate', 'Moderate'], ['Intensive', 'Intensive'] ];
+                        select(name="intensity", required="required")
+                            option -----
+                            - intensity.forEach(function (val) {
+                                option(value=val[0])= val[1]
+                            - })
+
+                .control-group
+                    lable.control-label Who are you traveling with?
+                    .controls
+                        - var withWho = [ ['Alone', 'Alone'], ['Friends', 'Friends'], ['Partner', 'Partner'], ['Family with kids', 'Family with kids'], , ['Family with kids', 'Family with kids'], ['Family without kids', 'Family without kids'] ];
                         select(name="with_who", required="required")
                             option -----
                             - withWho.forEach(function (val) {

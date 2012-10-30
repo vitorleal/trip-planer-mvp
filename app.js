@@ -121,12 +121,13 @@ var userSchema = new schema({
         default: Date.now
     },
     interests: {
-        museums:   String,
-        outdoors:  String,
-        sports:    String,
-        nightlife: String,
-        type_trip: String,
-        type_food: String
+        museums:   Array,
+        outdoors:  Array,
+        sports:    Array,
+        nightlife: Array,
+        type_food: Array,
+        music:     Array,
+        events:    Array
     }
 }),
 User = db.model('User', userSchema),

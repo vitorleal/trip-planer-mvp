@@ -223,9 +223,9 @@ var maps = {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    this.directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
-
     this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    this.directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+    this.directionsDisplay.setMap(this.map);
   },
 
 
@@ -283,7 +283,6 @@ var maps = {
       });
 
       if (i + 1 === results.length) {
-        self.directionsDisplay.setMap(self.map);
         self.calcRoute();
       }
     }
@@ -302,21 +301,22 @@ var maps = {
     self = this;
 
     this.directionsService.route(request, function (result, status) {
-      if (status === google.maps.DirectionsStatus.OK) {
+      if (status != 'MAX_WAYPOINTS_EXCEEDED') {
         self.directionsDisplay.setDirections(result);
+        self.directionsDisplay.setMap(self.map);
       }
     });
   },
 
   clearMap: function() {
-    this.directionsDisplay.setMap(null);
     for (var i = 0; i < this.markersArray.length; i++ ) {
       this.markersArray[i].setMap(null);
     }
 
+    this.directionsDisplay.setMap(null);
     this.markersArray = [];
-    this.bounds       = new google.maps.LatLngBounds();
     this.wayPoints    = [];
+    this.bounds       = new google.maps.LatLngBounds();
   },
 
 
