@@ -40,11 +40,19 @@ app.configure(function () {
     app.use(passport.initialize());
     app.use(passport.session());
 
+    //flash messages for error or success with the redirect
     app.use(flash());
 
     app.use(app.router);
 
     app.use(express.static(path.join(__dirname, 'public')));
+
+    app.use(require('less-middleware')({
+        src:  __dirname + '/public/less',
+        dest: __dirname + '/public/stylesheets',
+        prefix: '/stylesheets',
+        compress: true
+    }));
 
     app.use(i18n.init);
 
@@ -69,15 +77,10 @@ app.configure(function () {
 
 // Dev Config
 app.configure('development', function () {
-    app.use(express.errorHandler());
+    app.use(express.errorHandler({ showStack: true, dumpExceptions: true }));
     //Data passing to the passparot configuration in /config/passaport.js
     app.set('facebookId', '547560318604399');
     app.set('facebookSecret', 'c8c65f46c7e3807e8ac5e8cca0e3f942');
-
-    app.use(require('less-middleware')({
-        src: __dirname + '/public',
-        enable: ['less']
-    }));
 });
 
 app.configure('production', function () {
@@ -85,12 +88,6 @@ app.configure('production', function () {
     //Data passing to the passparot configuration in /config/passaport.js
     app.set('facebookId', '112711522214518');
     app.set('facebookSecret', 'f6a03086d3530372c5715458b7ef9563');
-
-    app.use(require('less-middleware')({
-        src: __dirname + '/public',
-        enable: ['less'],
-        compress: true
-    }));
 });
 
 
