@@ -301,7 +301,7 @@ var maps = {
     self = this;
 
     this.directionsService.route(request, function (result, status) {
-      if (status != 'MAX_WAYPOINTS_EXCEEDED') {
+      if (status !== 'MAX_WAYPOINTS_EXCEEDED') {
         self.directionsDisplay.setDirections(result);
         self.directionsDisplay.setMap(self.map);
       }
