@@ -293,7 +293,6 @@ var maps = {
       });
 
       if (i + 1 === results.length) {
-        self.directionsDisplay.setMap(self.map);
         self.calcRoute();
       }
     }
@@ -312,9 +311,9 @@ var maps = {
     self = this;
 
     this.directionsService.route(request, function (result, status) {
-      console.log(result);
-      if (status == google.maps.DirectionsStatus.OK) {
+      if (status != 'MAX_WAYPOINTS_EXCEEDED') {
         self.directionsDisplay.setDirections(result);
+        self.directionsDisplay.setMap(self.map);
       }
     });
   },
