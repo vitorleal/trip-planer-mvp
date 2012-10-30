@@ -233,9 +233,9 @@ var maps = {
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
-    this.directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
-
     this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    this.directionsDisplay = new google.maps.DirectionsRenderer({ suppressMarkers: true });
+    this.directionsDisplay.setMap(this.map);
   },
 
 
@@ -312,6 +312,7 @@ var maps = {
     self = this;
 
     this.directionsService.route(request, function (result, status) {
+      console.log(result);
       if (status == google.maps.DirectionsStatus.OK) {
         self.directionsDisplay.setDirections(result);
       }
@@ -319,14 +320,14 @@ var maps = {
   },
 
   clearMap: function() {
-    this.directionsDisplay.setMap(null);
     for (var i = 0; i < this.markersArray.length; i++ ) {
       this.markersArray[i].setMap(null);
     }
 
+    this.directionsDisplay.setMap(null);
     this.markersArray = [];
-    this.bounds       = new google.maps.LatLngBounds();
     this.wayPoints    = [];
+    this.bounds       = new google.maps.LatLngBounds();
   },
 
 

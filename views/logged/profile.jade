@@ -5,6 +5,8 @@ block modal
 
 block append head
     script(src='/javascripts/profile.js')
+    script(src='/javascripts/vendor/chosen.js')
+    link(rel='stylesheet', href='/stylesheets/chosen.css')
 
 block banner
     img.img-polaroid.img-profile(src="http://graph.facebook.com/#{user.facebook_id}/picture?type=large")
@@ -55,97 +57,108 @@ block content
     - }
 
     .row
-        h4.span12 Travel preferences
         form(action="/profile", method="post")
-            .span12
-                ul.unstyled
-                    li.span3.no-ml
-                        label Type of trip
-                        - var typeTrip = [ ['Cultural trip', 'Cultural trip'], ['Fun trip', 'Fun trip'], ['Relaxed trip', 'Relaxed trip'], ['Moderated trip', 'Moderated trip'], ['Intensive', 'Intensive'] ];
-                        select(name="type_trip")
-                            option -----
-                            - typeTrip.forEach(function (val) {
-                                - if (val[0] === user.interests.type_trip) {
-                                    option(value=val[0], selected="selected")= val[1]
-                                - } else {
-                                    option(value=val[0])= val[1]
-                                - }
-                            - })
-
-                    li.span3
-                        label Type of food
-                        - var typeFood = [ ['localfood', 'Local food'], ['international_food', 'International food'], ['asian_food', 'Asian food'], ['italian_food', 'Italian food'], ['french_food', 'French food'], ['fast_food', 'Fast food'], ['indian', 'Indian'], ['thai', 'Thai'], ['chinese', 'Chinese'], ['japanese', 'Japanese'] ];
-
-                        select(name="type_food")
-                            option -----
-                            - typeFood.forEach(function (val) {
-                                - if (val[0] === user.interests.type_food) {
-                                    option(value=val[0], selected="selected")= val[1]
-                                - } else {
-                                    option(value=val[0])= val[1]
-                                - }
-                            - })
-
             .span12.mb
 
-            h4.span12 Other Interests
+            h4.span12 Personal Profile
             .span12
-                ul.unstyled
-                    li.span3.no-ml
-                        label Museums
-                        - var museums = [ ['dont_like', 'Don\'t like'], ['modern_art', 'Modern Art'], ['archeology', 'Archeology'], ['science', 'Science'], ['classical_art', 'Classical Art'] ];
-                        select(name="museums")
-                            option -----
-                            - museums.forEach(function (val) {
-                                - if (val[0] === user.interests.museums) {
-                                    option(value=val[0], selected="selected")= val[1]
-                                - } else {
-                                    option(value=val[0])= val[1]
-                                - }
-                            - })
+                .span3.no-ml
+                    ul.unstyled
+                        li.mb
+                            label Museums
+                            - var museums = [ ['dont_like', 'Don\'t like'], ['modern_art', 'Modern Art'], ['archeology', 'Archeology'], ['science', 'Science'], ['classical_art', 'Classical Art'] ];
+                            select.chzn-select(name="museums", multiple="multiple")
+                                - museums.forEach(function (val) {
+                                    - if (user.interests.museums.indexOf(val[0]) === -1) {
+                                        option(value=val[0])= val[1]
+                                    - } else {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - }
+                                - })
 
-                    li.span3
-                        label Outdoors
-                        - var outdoors = [ ['dont_like', 'Don\'t like'], ['architechture', 'Architechture'], ['parks', 'Parks'], ['neighborhoods_intineraries', 'Special neighborhoods intineraries'] ];
-                        select(name="outdoors")
-                            option -----
-                            - outdoors.forEach(function (val) {
-                                - if (val[0] === user.interests.outdoors) {
-                                    option(value=val[0], selected="selected")= val[1]
-                                - } else {
-                                    option(value=val[0])= val[1]
-                                - }
-                            - })
+                        li
+                            label Type of food
+                            - var typeFood = [ ['localfood', 'Local food'], ['international_food', 'International food'], ['asian_food', 'Asian food'], ['italian_food', 'Italian food'], ['french_food', 'French food'], ['fast_food', 'Fast food'], ['indian', 'Indian'], ['thai', 'Thai'], ['chinese', 'Chinese'], ['japanese', 'Japanese'] ];
+                            select.chzn-select(name="type_food", multiple="multiple")
+                                - typeFood.forEach(function (val) {
+                                    - if (user.interests.type_food.indexOf(val[0]) === -1) {
+                                        option(value=val[0])= val[1]
+                                    - } else {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - }
+                                - })
 
-                    li.span3
-                        label Sports
-                        - var sports = [ ['dont_like', 'Don\'t like'], ['football', 'Football'], ['rugby', 'Rugby'], ['tennis', 'Tennis'], ['basketball', 'Basketball'], ['volleyball', 'Volleyball'] ];
-                        select(name="sports")
-                            option -----
-                            - sports.forEach(function (val) {
-                                - if (val[0] === user.interests.sports) {
-                                    option(value=val[0], selected="selected")= val[1]
-                                - } else {
-                                    option(value=val[0])= val[1]
-                                - }
-                            - })
+                .span3
+                    ul.unstyled
+                        li.mb
+                            label Outdoors
+                            - var outdoors = [ ['dont_like', 'Don\'t like'], ['architechture', 'Architechture'], ['parks', 'Parks'], ['neighborhoods_intineraries', 'Special neighborhoods intineraries'] ];
+                            select.chzn-select(name="outdoors", multiple="multiple")
+                                - outdoors.forEach(function (val) {
+                                    - if (user.interests.outdoors.indexOf(val[0]) === -1) {
+                                        option(value=val[0])= val[1]
+                                    - } else {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - }
+                                - })
 
-                    li.span3
-                        label Nightlife
-                        - var nightlife = [ ['dont_like', 'Don\'t like'], ['concerts', 'Concerts'], ['discos', 'Discos'], ['bars', 'Bars'], ['shows', 'Shows'] ];
-                        select(name="nightlife")
-                            option -----
-                            - nightlife.forEach(function (val) {
-                                - if (val[0] === user.interests.nightlife) {
-                                    option(value=val[0], selected="selected")= val[1]
-                                - } else {
-                                    option(value=val[0])= val[1]
-                                - }
-                            - })
+                        li
+                            label Events
+                            - var events = [ ['concerts', 'Concerts'], ['shows', 'Shows'], ['theater', 'Theater'], ['local_culture', 'Related to local culture'] ];
+                            select.chzn-select(name="events", multiple="multiple")
+                                - events.forEach(function (val) {
+                                    - if (user.interests.events.indexOf(val[0]) === -1) {
+                                        option(value=val[0])= val[1]
+                                    - } else {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - }
+                                - })
 
-                    li.span12.no-ml
-                        input(type="hidden", name="_method", value="put")
-                        input.btn.btn-primary.pull-right.mt(type="submit", value="Update profile", name="update-profile")
+
+
+                .span3
+                    ul.unstyled
+                        li.mb
+                            label Sports
+                            - var sports = [ ['dont_like', 'Don\'t like'], ['golf', 'Golf'], ['motor', 'Motor'], ['football', 'Football'], ['rugby', 'Rugby'], ['tennis', 'Tennis'], ['basketball', 'Basketball'], ['volleyball', 'Volleyball'] ];
+                            select.chzn-select(name="sports", multiple="multiple")
+                                - sports.forEach(function (val) {
+                                    - if (user.interests.sports.indexOf(val[0]) === -1) {
+                                        option(value=val[0])= val[1]
+                                    - } else {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - }
+                                - })
+
+                        li
+                            label Music
+                            - var music = [ ['classical', 'Classical'], ['rock', 'Rock'], ['jazz_blues', 'Jazz/Blues'], ['ppera', 'Opera'], ['electronic', 'Electronic'], ['rnb_rap', 'R&B/Rap'], ['pop', 'Pop'], ['latino', 'Latino'], ['raggae', 'Raggae'], ['heavy', 'Heavy'] ];
+                            select.chzn-select(name="music", multiple="multiple")
+                                - music.forEach(function (val) {
+                                    - if (user.interests.music.indexOf(val[0]) === -1) {
+                                        option(value=val[0])= val[1]
+                                    - } else {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - }
+                                - })
+
+                .span3
+                    ul.unstyled
+                        li
+                            label Nightlife
+                            - var nightlife = [ ['dont_like', 'Don\'t like'], ['concerts', 'Concerts'], ['discos', 'Discos'], ['bars', 'Bars'], ['shows', 'Shows'] ];
+                            select.chzn-select(name="nightlife", multiple="multiple")
+                                - nightlife.forEach(function (val) {
+                                    - if (user.interests.nightlife.indexOf(val[0]) === -1) {
+                                        option(value=val[0])= val[1]
+                                    - } else {
+                                        option(value=val[0], selected="selected")= val[1]
+                                    - }
+                                - })
+
+                        li
+                            input(type="hidden", name="_method", value="put")
+                            input.btn.btn-primary.mt.mt-xxl(type="submit", value="Update profile", name="update-profile")
 
 
 

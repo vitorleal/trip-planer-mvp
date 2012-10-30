@@ -167,8 +167,9 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
                 user.interests.outdoors  = req.body.outdoors;
                 user.interests.sports    = req.body.sports;
                 user.interests.nightlife = req.body.nightlife;
-                user.interests.type_trip = req.body.type_trip;
                 user.interests.type_food = req.body.type_food;
+                user.interests.music     = req.body.music;
+                user.interests.events    = req.body.events;
 
                 console.log(req.body);
                 user.save(function (err) {
@@ -208,7 +209,10 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
                     days: req.body.days,
                     intensity: req.body.intensity,
                     withWho: req.body.with_who,
-                    firstTime: req.body.first_time
+                    firstTime: req.body.first_time,
+                    typeTrip: req.body.type_trip,
+                    start: req.body.start,
+                    end: req.body.end
                 }
             });
         });
