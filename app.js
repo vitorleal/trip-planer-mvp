@@ -109,6 +109,10 @@ var userSchema = new schema({
     location:    String,
     locale:      String,
     birthday:    String,
+    role:        {
+        type: String,
+        default: "user"
+    },
     created_at: {
         type:    Date,
         default: Date.now
@@ -225,9 +229,10 @@ Register = db.model('Register', registerSchema);
 //Passaport config
 var passaportConifg     = require('./configs/passaport.js')(passport, User, app.get('facebookId'), app.get('facebookSecret')),
     ensureAuthenticated = function (req, res, next) {
-        if (req.isAuthenticated()) {
+        if (req.isAuthenticated() && req.user.role === "admin") {
             return next();
         }
+        req.flash('error', 'Sorry we are not open yet!');
         res.redirect('/');
     };
 

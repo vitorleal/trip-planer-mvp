@@ -5,7 +5,8 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
         res.render('pages/index', {
             title: 'Plan it',
             description: 'Description of the first page',
-            success: req.flash('success')
+            success: req.flash('success'),
+            error: req.flash('error')
         });
     });
 
@@ -123,15 +124,15 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
                 });
             });
         });
-    app.get('/points/edit/:id', function (req, res) {
-        Point.findById(req.params.id, function (err, point) {
-            res.render('admin/points-edit', {
-                title: 'Edit point',
-                description: 'Description of maps points',
-                point: point
+        app.get('/points/edit/:id', function (req, res) {
+            Point.findById(req.params.id, function (err, point) {
+                res.render('admin/points-edit', {
+                    title: 'Edit point',
+                    description: 'Description of maps points',
+                    point: point
+                });
             });
         });
-    });
         app.put('/points/edit/:id', function (req, res) {
             Point.findById(req.params.id, function (err, point) {
                 point.city            = req.body.city;
