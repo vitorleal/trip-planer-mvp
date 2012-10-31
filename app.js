@@ -199,7 +199,27 @@ pointSchema = new schema({
         default: "No details provided"
     }
 }),
-Point = db.model('Point', pointSchema);
+Point = db.model('Point', pointSchema),
+
+registerSchema = new schema({
+    name: {
+        type: String,
+        default: "No name"
+    },
+    last_name: {
+        type: String,
+        default: "No last name"
+    },
+    email: {
+        type: String,
+        default: "No email"
+    },
+    registred_at: {
+        type:    Date,
+        default: Date.now
+    }
+}),
+Register = db.model('Register', registerSchema);
 
 
 //Passaport config
@@ -213,7 +233,7 @@ var passaportConifg     = require('./configs/passaport.js')(passport, User, app.
 
 
 //Routes
-var routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination, Trip, Point);
+var routes = require("./routes/routes.js")(app, ensureAuthenticated, passport, User, Destination, Trip, Point, Register);
 
 
 // Create the server

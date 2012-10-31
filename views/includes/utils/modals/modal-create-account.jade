@@ -1,25 +1,26 @@
 #createAccount.modal.hide.fade
     .modal-header
-        h3 Create your account in Plan it
+        h3 We are open soon
 
     form.form-horizontal(method="post", action="/")
         .modal-body
+            h5 Register here and you will be notified when the service is available
                 .control-group.mt
                     lable.control-label Name
                     .controls
-                        input(type="text", required="true")
+                        input(type="text", name="name", required="true")
 
                 .control-group
                     lable.control-label Last name
                     .controls
-                        input(type="text", required="true")
+                        input(type="text", name="last_name", required="true")
 
                 .control-group
                     lable.control-label Email
                     .controls
-                        input(type="email", required="true")
+                        input(type="email", name="email", required="true")
 
 
         .modal-footer
             a.btn(href="#", data-dismiss="modal") Cancel
-            button.btn.btn-primary(type="submit") Create account
+            button.btn.btn-primary(type="submit") Register

@@ -1,5 +1,13 @@
 extends ../layout
 
 block content
-    .t-center.mt.mt-xxl
-        img(src="images/landpage.png")
+
+	- if(success.length) {
+		.alert.alert-success.alert-block.fade.in.mt.mt-xxl
+			button.close(type="button", data-dismiss="alert") ×
+			p
+				strong #{success}
+	- }
+
+	.t-center.mt.mt-xxl
+		img(src="images/landpage.png")

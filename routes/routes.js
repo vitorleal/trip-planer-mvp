@@ -1,10 +1,26 @@
-module.exports = function(app, ensureAuthenticated, passport, User, Destination, Trip, Point) {
+module.exports = function(app, ensureAuthenticated, passport, User, Destination, Trip, Point, Register) {
 
     // Index
     app.get('/', function (req, res) {
         res.render('pages/index', {
             title: 'Plan it',
-            description: 'Description of the first page'
+            description: 'Description of the first page',
+            success: req.flash('success')
+        });
+    });
+
+    app.post('/', function (req, res) {
+        var register = new Register();
+
+        register.name      = req.body.name;
+        register.last_name = req.body.last_name;
+        register.email     = req.body.email;
+
+        register.save(function (err) {
+            if (err) { throw err; }
+            console.log('New register');
+            req.flash('success', 'Thanks for signing up!');
+            res.redirect('/');
         });
     });
 
