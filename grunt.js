@@ -41,18 +41,18 @@ module.exports = function(grunt) {
         src: ['public/javascripts/map.js'],
         dest: 'public/javascripts/min/map.min.js'
       }
-    }/*,
+    },
     img: {
       task: {
           src: 'public/images',
           dest: 'public/images'
       }
-    }*/
+    }
   });
 
   grunt.loadNpmTasks('grunt-img');
 
   // Default task.
-  grunt.registerTask('default', 'lint min');
+  grunt.registerTask('default', 'lint min img');
 
 };

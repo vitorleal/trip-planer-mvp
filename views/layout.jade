@@ -1,5 +1,7 @@
 include includes/head
 
+    include includes/utils/modals/modal-create-account.jade
+
     body
         section
             block header
@@ -15,6 +17,7 @@ include includes/head
                     .container
                         h1.logo #{__("Plan it")}
                         h2 #{__("The best way to plan your trip")}
+                        a.login-plnit.pull-right(href="#", data-toggle="modal", data-target="#createAccount") #{__("create an account in Pln it")}
                         a.login-fb.pull-right(href="/auth/facebook") #{__("login with facebook")}
 
             article.sub-content

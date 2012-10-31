@@ -69,24 +69,6 @@ var maps = {
         "address": "Plaza Mayor, 30 28012 Madrid, Spain"
       },
        {
-        "title": "Plaza España",
-        "description": "You just have to look at the number of people lying on the grass alongside the fountains or resting on the park benches to know this is a popular spot. The most prominent feature is the statue dedicated to Spain's most famous writer, Miguel de Cervantes, that depicts his two principal characters - Don Quijote and Sancho Panza. At Christmas time, the area towards Calle Princesa fills with stalls selling all types of gifts and decorative objects. You can't help but notice the two enormous mid-20th-century skyscrapers here: El Edificio España and La Torre de Madrid.",
-        "geo": {
-          "lat": "40.42764289183605",
-          "lng": "-3.7132930755615234"
-        },
-        "address": "Plaza de España, Madrid, Spain"
-      },
-       {
-        "title": "Calle Gran Vía",
-        "description": "Is an ornate and upscale shopping street located in central Madrid. It leads from Calle de Alcalá, close to Plaza de Cibeles, to Plaza de España. The lively street is one of the city's most important shopping areas, with a large number of hotels and large movie theaters; it is also noted for the grand architecture prevalent among many of its buildings. Now, most of the theaters are being replaced by shopping malls. It is considered a showcase of early 20th century architecture, with patterns ranging from Vienna Secession style, Plateresque, Neo-Mudéjar, Art Deco and others",
-        "geo": {
-          "lat": "40.42421263753269",
-          "lng": "-3.703465461730957"
-        },
-        "address": "Calle Gran Vía, Madrid, Spain"
-      },
-       {
         "title": "Fuente de Cibeles",
         "description": "Another majestic work of art commissioned by King Carlos III to ennoble the city. This time his architects chose to create an image in white stone of the goddess Cibeles (La Fuente de Cibeles) driving a carriage drawn by lions. Ventura Rodríguez came up with the design while Roberto Michel and Francisco Gutierrez carried out the work. It's surrounded by some of the city's most important historic buildings and it has become a favorite symbolic landmark for madrileños. The fans of Real Madrid football club gather here to celebrate their team's victories.",
         "geo": {
@@ -94,15 +76,6 @@ var maps = {
           "lng": "-3.6931228637695312"
         },
         "address": "Plaza de Cibeles, 28014 Madrid, Spain"
-      },
-      {
-        "title": "Banco de España",
-        "description": "The Spanish Central Bank headquarters houses a valuable art collection that includes the work of artists like Goya, Salvador Maella, Sorolla, and Zuloaga, as well as luxurious wall-hangings and antique furniture. The interior patio is used as a library and the beautiful staircase is made of Carrara marble. It occupies one of the best locations in Madrid, at major crossroads linking Plaza de Cibeles with Calle Alcalá, Gran Vía, and the Paseo del Prado. After opening in 1889, it had to be expanded in 1936 and then again in 1975. The three distinct façades display diverse architectural styles. For admission, write to the Servicio de Protocolo at the bank's address, or call.",
-        "geo": {
-          "lat": "40.42016144525906",
-          "lng": "-3.69415283203125"
-        },
-        "address": "Calle de Alcalá, 48, 28014 Madrid, Spain"
       },
       {
         "title": "Puerta de Alcalá",
@@ -139,15 +112,6 @@ var maps = {
           "lng": "-3.6975860595703125"
         },
         "address": "Calle de Augusto Figueroa, 24, 28004 Madrid, Spain"
-      },
-      {
-        "title": "Chueca Neighborhood (Walking and Drinks)",
-        "description": "Chueca in Madrid is the gay area and home to the coolest bars and restaurants around. The main street is packed with bars; the most difficult thing is to choose where to go. It makes for a very good bar crawl, but don’t go there if you are homophobic as it is very overtly gay.  A good starting point is Plaza de Chueca as the metro is there and most of the good streets for going out are around there. Try Sierra Angel, a little, old vermouth bar with lots of character which overlooks the square to get you going. Remember in Madrid nothing gets going until around 10 or later so have a siesta and eat late so you are ready to party into the early hours with the Spaniards.",
-        "geo": {
-          "lat": "40.455829687131434",
-          "lng": "-3.6975860595703125"
-        },
-        "address": "Chueca, Madrid, Spain"
       },
       {
         "title": "Gabana 1800",
@@ -387,7 +351,6 @@ $(function () {
       maps.showDay(day);
       $(this).siblings().removeClass('disabled').end().addClass('disabled');
     }
-    $('.datePlan').text($(this).data('date'));
   }).first().click();
 
   //Open the show more

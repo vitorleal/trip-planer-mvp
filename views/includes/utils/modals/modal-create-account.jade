@@ -1,0 +1,25 @@
+#createAccount.modal.hide.fade
+    .modal-header
+        h3 Create your account in Plan it
+
+    form.form-horizontal(method="post", action="/")
+        .modal-body
+                .control-group.mt
+                    lable.control-label Name
+                    .controls
+                        input(type="text", required="true")
+
+                .control-group
+                    lable.control-label Last name
+                    .controls
+                        input(type="text", required="true")
+
+                .control-group
+                    lable.control-label Email
+                    .controls
+                        input(type="email", required="true")
+
+
+        .modal-footer
+            a.btn(href="#", data-dismiss="modal") Cancel
+            button.btn.btn-primary(type="submit") Create account

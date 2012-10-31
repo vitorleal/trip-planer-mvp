@@ -19,5 +19,6 @@
 	"print your trip": "print your trip",
 	"save your trip": "save your trip",
 	"your profile": "your profile",
-	"about your trip": "about your trip"
+	"about your trip": "about your trip",
+	"create an account in Pln it": "create an account in Pln it"
 }
