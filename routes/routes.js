@@ -245,7 +245,7 @@ module.exports = function(app, ensureAuthenticated, passport, User, Destination,
     app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email', 'user_birthday', 'user_hometown', 'user_checkins' ] }),
         function (req, res) {}
     );
-    app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }),
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/' }),
         function (req, res) {
             res.redirect('/profile');
         }
