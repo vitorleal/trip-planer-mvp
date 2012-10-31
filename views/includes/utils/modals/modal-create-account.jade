@@ -2,23 +2,23 @@
     .modal-header
         h3 We are open soon
 
-    form.form-horizontal(method="post", action="/")
+    form.form-horizontal.formRequired(method="post", action="/")
         .modal-body
             h5 Register here and you will be notified when the service is available
                 .control-group.mt
                     lable.control-label Name
                     .controls
-                        input(type="text", name="name", required="true")
+                        input.required(type="text", name="name")
 
                 .control-group
                     lable.control-label Last name
                     .controls
-                        input(type="text", name="last_name", required="true")
+                        input.required(type="text", name="last_name")
 
                 .control-group
                     lable.control-label Email
                     .controls
-                        input(type="email", name="email", required="true")
+                        input.required.email(type="email", name="email")
 
 
         .modal-footer

@@ -11,4 +11,8 @@ $(function () {
             $(".alert").alert('close');
         }, 3500);
     }
+
+
+    $('.formRequired').validate();
+
 });
